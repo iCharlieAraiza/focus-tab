@@ -34,11 +34,13 @@ main {
       -ms-flex-pack: end;
           justify-content: end;
   text-align: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   padding: 1rem;
 }
 
 .card-wrapper h3 {
-  font-weight: 400;
+  font-weight: 100;
   margin: 0;
 }
 
@@ -52,7 +54,8 @@ main {
 }
 
 .card-wrapper .figure {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
+  font-weight: 300;
 }
 
 .card-wrapper .name {
@@ -64,6 +67,81 @@ main {
 }
 
 .card-wrapper .icon img {
-  width: 35px;
+  width: 32px;
+}
+
+.main-section {
+  color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 2rem;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 1.4rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  top: 25%;
+}
+
+.main-section ul {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+  text-transform: uppercase;
+  padding: 0;
+}
+
+.main-section .clock-container .time {
+  padding: 0;
+  font-size: 8rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.task-container {
+  width: 50%;
+}
+
+.task-container .tab-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: end;
+}
+
+.task-container .tab {
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.task-container .tab .title {
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.task-container .tab.active {
+  width: 30rem;
+}
+
+.task-container .todo-container {
+  padding: 0 1rem;
+}
+
+.task-container .todo-container ul {
+  text-transform: none;
+  display: list-item;
 }
 /*# sourceMappingURL=style.css.map */
