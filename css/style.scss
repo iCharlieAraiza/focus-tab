@@ -63,7 +63,7 @@ main{
 
 
 .main-section{
-    color: #fff;
+    color: rgb(251, 251, 251);
     display: flex;
     padding: 2rem;
     position: absolute;
@@ -107,21 +107,84 @@ main{
         .title{
             text-transform: uppercase;
             cursor: pointer;
-            padding: 1rem;
+            padding: 1rem 2rem;
             border-radius: 8px;
         }
 
         &.active{
             width: 30rem;
+            height: 25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .todo-container{
+                margin-bottom: auto;
+            }
         }
     }
 
     .todo-container{
-        padding: 0 1rem;
+        padding: 0 2rem 3rem 2rem;
         ul{
-            text-transform: none;
             display: list-item;
         }
+        li{
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            span{
+                &:first-child{
+                    margin-right: 1rem;
+                }
+            }
+        }
+    }
+
+    .select-circle{
+        display: block;
+        height: 0.8rem;
+        width: 0.8rem;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .title-task{
+        text-transform: none;
     }
 }
 
+.todo-form{
+    padding: 1.5rem 1rem;
+    .action-title{
+        text-align: center;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    .add-form{
+        input{
+            width: 100%;
+            font-size: 1.2rem;
+            background-color: transparent;
+            color: #fff;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            padding-bottom: 5px;
+            &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                color: rgb(255, 255, 255);
+                opacity: 0.6; /* Firefox */
+              }
+            &:focus{
+                outline: none;
+                border-bottom: 1px  solid #fff;
+                &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+                    opacity: 0.9; /* Firefox */
+                  }
+            }
+        }
+
+    }
+}

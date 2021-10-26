@@ -71,7 +71,7 @@ main {
 }
 
 .main-section {
-  color: #fff;
+  color: #fbfbfb;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -128,20 +128,140 @@ main {
 .task-container .tab .title {
   text-transform: uppercase;
   cursor: pointer;
-  padding: 1rem;
+  padding: 1rem 2rem;
   border-radius: 8px;
 }
 
 .task-container .tab.active {
   width: 30rem;
+  height: 25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.task-container .tab.active .todo-container {
+  margin-bottom: auto;
 }
 
 .task-container .todo-container {
-  padding: 0 1rem;
+  padding: 0 2rem 3rem 2rem;
 }
 
 .task-container .todo-container ul {
-  text-transform: none;
   display: list-item;
+}
+
+.task-container .todo-container li {
+  font-size: 1.2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 1rem 0;
+}
+
+.task-container .todo-container li span:first-child {
+  margin-right: 1rem;
+}
+
+.task-container .select-circle {
+  display: block;
+  height: 0.8rem;
+  width: 0.8rem;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.task-container .title-task {
+  text-transform: none;
+}
+
+.todo-form {
+  padding: 1.5rem 1rem;
+}
+
+.todo-form .action-title {
+  text-align: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.todo-form .add-form input {
+  width: 100%;
+  font-size: 1.2rem;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid transparent;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-bottom: 5px;
+}
+
+.todo-form .add-form input::-webkit-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.6;
+  /* Firefox */
+}
+
+.todo-form .add-form input:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.6;
+  /* Firefox */
+}
+
+.todo-form .add-form input::-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.6;
+  /* Firefox */
+}
+
+.todo-form .add-form input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.6;
+  /* Firefox */
+}
+
+.todo-form .add-form input:focus {
+  outline: none;
+  border-bottom: 1px  solid #fff;
+}
+
+.todo-form .add-form input:focus::-webkit-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0.9;
+  /* Firefox */
+}
+
+.todo-form .add-form input:focus:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0.9;
+  /* Firefox */
+}
+
+.todo-form .add-form input:focus::-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0.9;
+  /* Firefox */
+}
+
+.todo-form .add-form input:focus::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  opacity: 0.9;
+  /* Firefox */
 }
 /*# sourceMappingURL=style.css.map */
