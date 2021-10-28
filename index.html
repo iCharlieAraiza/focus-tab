@@ -69,6 +69,12 @@
                 <div class="clock">
                     <div class="time">10:20 AM</div>
                 </div>
+                <div class="timer">
+                    <div class="time">10:20 AM</div>
+                    <div class="button" id="play">
+                        <img src="/assets/img/icons/play-button.png" alt="" srcset="">
+                    </div>
+                </div>
             </div>
             <div class="task-container col-5">
                 <div class="tab-section">
@@ -77,7 +83,7 @@
                             Today
                         </div>
                         <div class="todo-container">
-                            <ul>
+                            <ul id="listContainer">
                                 <li>
                                     <span class="select-circle"></span>
                                     <div class="title-task">New Task</div>
@@ -94,7 +100,7 @@
                             </div>
 
                             <div class="add-form"> 
-                                <input type="text" placeholder="+  New task">
+                                <input type="text" placeholder="+  New task" id="taskform">
                             </div> 
                         </div>
                     </div>
@@ -102,5 +108,85 @@
             </div>
         </section>
     </main>
+<script>
+    let time = 1500,
+        breakTime = 20,
+        active = false
+
+    const timer = document.querySelector('.timer .time')
+    const play = document.querySelector('#play')
+
+    play.onclick = ()=>{
+        active = !active
+        const interval = setInterval(()=>{
+            if(!active){
+                clearInterval(interval)
+            } 
+            if(seconds <= 0){
+                if(breakTime <= 0){
+                    clearInterval(interval)
+                }   
+                timer.innerHTML = timeFormat(breakTime--)
+            }else{
+                timer.innerHTML = timeFormat(seconds--)
+            }
+        },1000)        
+    }
+
+
+
+    let seconds = time;
+    
+
+
+    const timeFormat = (seconds)=>{
+        if(seconds >=3600){
+            return Math.floor(seconds/360)
+        }else{
+            const def = (seconds%60 <10 ? '0' + seconds%60 :  seconds%60)
+            const minutes = Math.floor(seconds/60) < 10 ? '0' + Math.floor(seconds/60) : Math.floor(seconds/60);
+
+            if(seconds>=360 && seconds < 3600){
+                return minutes + ':' + def
+            }
+            if(seconds>=60 && seconds<360){
+                console.log(seconds%60)
+                //return minutes + ':'+ (seconds%60 == 0 ? '00' : seconds%60)
+                return minutes + ':' + def
+            }
+            if(seconds>=10 && seconds<60){
+                return '00:'+seconds
+            }else if(seconds<10){
+                return '00:'+def
+            }
+
+        }
+    }
+
+    /*
+        To-do App
+    */
+
+    const taskList = [{}];
+
+    const taskform = document.querySelector('#taskform'),
+    listContainer = document.querySelector('#listContainer')
+
+    taskform.addEventListener('change', (event)=>{
+        taskList.push({status:active, value:taskform.value})
+
+        let newList = '';
+
+        taskList.fo
+
+        listContainer.innerHTML =  '';
+
+    })
+
+
+    
+
+
+</script>
 </body>
 </html>
