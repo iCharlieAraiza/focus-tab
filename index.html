@@ -109,59 +109,57 @@
         </section>
     </main>
 <script>
-    let time = 1500,
+    let sessionTime = 19500,
         breakTime = 20,
-        active = false
+        active = false,
+        interval = '',
+        runningTime = 0 
 
     const timer = document.querySelector('.timer .time')
     const play = document.querySelector('#play')
+    
+    let startTime = 0,
+        currentTime = 0;
 
     play.onclick = ()=>{
         active = !active
-        const interval = setInterval(()=>{
-            if(!active){
-                clearInterval(interval)
-            } 
-            if(seconds <= 0){
-                if(breakTime <= 0){
-                    clearInterval(interval)
-                }   
-                timer.innerHTML = timeFormat(breakTime--)
-            }else{
-                timer.innerHTML = timeFormat(seconds--)
-            }
-        },1000)        
+        if(active)
+            start();
+        else
+            pause();
+    }
+    
+    const start = ()=>{
+        startTime = Date.now() - runningTime
+        interval = setInterval(()=>{
+            const time = Date.now() - startTime
+            currentTime =  sessionTime - ( Math.floor(time / 1000) ) 
+            timer.textContent = calculateTime(currentTime)
+            console.log( calculateTime(currentTime) )
+        },1000)
+    }
+    
+    const pause = ()=>{
+        sessionTime = currentTime
+        clearInterval(interval)
     }
 
-
-
-    let seconds = time;
-    
-
-
-    const timeFormat = (seconds)=>{
-        if(seconds >=3600){
-            return Math.floor(seconds/360)
-        }else{
-            const def = (seconds%60 <10 ? '0' + seconds%60 :  seconds%60)
-            const minutes = Math.floor(seconds/60) < 10 ? '0' + Math.floor(seconds/60) : Math.floor(seconds/60);
-
-            if(seconds>=360 && seconds < 3600){
-                return minutes + ':' + def
-            }
-            if(seconds>=60 && seconds<360){
-                console.log(seconds%60)
-                //return minutes + ':'+ (seconds%60 == 0 ? '00' : seconds%60)
-                return minutes + ':' + def
-            }
-            if(seconds>=10 && seconds<60){
-                return '00:'+seconds
-            }else if(seconds<10){
-                return '00:'+def
-            }
-
+    const calculateTime = value => {
+        const sec = parseInt(value, 10); 
+        let hours = Math.floor(sec / 3600); 
+        let minutes = Math.floor((sec - hours * 3600) / 60); 
+        let seconds = sec - hours * 3600 - minutes * 60;
+        if (hours < 10) {      hours = '0' + hours;    }
+        if (minutes < 10) {      minutes = '0' + minutes;    }
+        if (seconds < 10) {      seconds = '0' + seconds;    }
+        if (hours == 0) {
+        return +minutes + ':' + seconds; // Return in MM:SS format
+        } else {
+        return  ( (hours * 60) + minutes) + ':' + seconds; // Return in HH:MM:SS format
         }
     }
+    
+
 
     /*
         To-do App
