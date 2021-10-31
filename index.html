@@ -67,10 +67,10 @@
                     </ul>
                 </div>
                 <div class="clock">
-                    <div class="time">10:20 AM</div>
+                    <div class="time"> <span class="time-stamp"></span> <span class="meridian">AM</span></div>
                 </div>
                 <div class="timer">
-                    <div class="time">10:20 AM</div>
+                    <div class="time">25:00 </div>
                     <div class="button" id="play">
                         <img src="/assets/img/icons/play-button.png" alt="" srcset="">
                     </div>
@@ -109,17 +109,18 @@
         </section>
     </main>
 <script>
-    let sessionTime = 19500,
+    let sessionTime = 3610,
         breakTime = 20,
         active = false,
         interval = '',
         runningTime = 0 
 
     const timer = document.querySelector('.timer .time')
+    const clock = document.querySelector('.clock .time')
     const play = document.querySelector('#play')
     
-    let startTime = 0,
-        currentTime = 0;
+    let startTime = 0
+    let currentTime = 0;
 
     play.onclick = ()=>{
         active = !active
@@ -135,10 +136,10 @@
             const time = Date.now() - startTime
             currentTime =  sessionTime - ( Math.floor(time / 1000) ) 
             timer.textContent = calculateTime(currentTime)
-            console.log( calculateTime(currentTime) )
         },1000)
     }
-    
+
+
     const pause = ()=>{
         sessionTime = currentTime
         clearInterval(interval)
@@ -150,15 +151,81 @@
         let minutes = Math.floor((sec - hours * 3600) / 60); 
         let seconds = sec - hours * 3600 - minutes * 60;
         if (hours < 10) {      hours = '0' + hours;    }
-        if (minutes < 10) {      minutes = '0' + minutes;    }
+        if ( (hours * 60) + minutes < 10 ) { minutes = `0${minutes}`}
         if (seconds < 10) {      seconds = '0' + seconds;    }
         if (hours == 0) {
-        return +minutes + ':' + seconds; // Return in MM:SS format
+        return minutes + ':' + seconds; // Return in MM:SS format
         } else {
         return  ( (hours * 60) + minutes) + ':' + seconds; // Return in HH:MM:SS format
         }
     }
     
+
+
+    /*
+        Set time
+    */
+
+    
+    /*
+    play.onclick = ()=>{
+        active = !active
+        const interval = setInterval(()=>{
+            if(!active){
+                clearInterval(interval)
+            } 
+            if(seconds <= 0){
+                if(breakTime <= 0){
+                    clearInterval(interval)
+                }   
+                timer.innerHTML = timeFormat(breakTime--)
+            }else{
+                timer.innerHTML = timeFormat(seconds--)
+            }
+        },1000)        
+    }
+
+    */
+    
+
+    /*
+        Create a Clock
+    */
+
+
+
+    setInterval(()=>{
+        const today = new Date(); 
+        let hours = today.getHours()
+        let medridian = ''
+        let minutes = today.getMinutes() < 10 ? `0${today.getMinutes()}` : today.getMinutes()
+        
+        if(hours > 12){
+            hours = hours - 12
+            meridian = 'PM'
+        }else{
+            hours = hours < 10 ? `0${hours}` : hours
+            meridian = 'AM'
+        }   
+        clock.textContent = `${hours}:${minutes} ${meridian}`
+        console.log(today.getSeconds())
+    },1000)
+
+    /*
+    let hours = today.getHours()
+    let medridian = ''
+    
+    if(hours > 12){
+        hours = hours - 12
+        meridian = 'PM'
+    }else{
+        meridian = 'AM'
+    }   
+
+    console.log( `${hours}:${today.getMinutes()} ${meridian}` )
+
+    //console.log(hours + ":" + today.getMinutes())
+
 
 
     /*
