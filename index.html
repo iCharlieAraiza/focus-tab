@@ -31,19 +31,19 @@
                     </h3>
                 </div>
                 <div class="card">
-                    <h3 class="figure">
-                        9:10
+                    <h3 class="figure" id="accumulatedTime">
+                        0:00
                     </h3>
                     <h3 class="name">
                         Time
                     </h3>
                 </div>
                 <div class="card">
-                    <h3 class="figure">
-                        9
+                    <h3 class="figure" id="sessions">
+                        0
                     </h3>
                     <h3 class="name">
-                        Pending
+                        Sessions
                     </h3>
                 </div>
                 <div class="card">
@@ -60,20 +60,23 @@
             </div>
         </section>
         <section class="main-section">
-            <div class="clock-container">
+            <div class="clock-container active">
                 <div class="button-container col-5">
                     <ul>
                         <li>Timer</li>
                     </ul>
-                </div>
-                <div class="clock">
-                    <div class="time"> <span class="time-stamp"></span> <span class="meridian">AM</span></div>
                 </div>
                 <div class="timer">
                     <div class="time">25:00 </div>
                     <div class="button" id="play">
                         <img src="/assets/img/icons/play-button.png" alt="" srcset="">
                     </div>
+                    <div class="button" id="stop">
+                        <img src="/assets/img/icons/stop-button.png" alt="" srcset="">
+                    </div>
+                </div>
+                <div class="clock">
+                    <div class="time"> <span class="time-stamp"></span> <span class="meridian"></span></div>
                 </div>
             </div>
             <div class="task-container col-5">
@@ -109,16 +112,26 @@
         </section>
     </main>
 <script>
-    let sessionTime = 3610,
-        breakTime = 20,
+    let sessionValue = 7,
+        breakValue = 3,
+        sessions = 0,
+        accumulatedTime = 0;
+
+
+    let sessionTime = sessionValue,
+        breakTime = breakValue,
         active = false,
         interval = '',
-        runningTime = 0 
+        runningTime = 0,
+        isBreak = false
 
     const timer = document.querySelector('.timer .time')
     const clock = document.querySelector('.clock .time')
     const play = document.querySelector('#play')
-    
+    const stop = document.querySelector('#stop')
+
+    const tittle = document.querySelector('title')
+
     let startTime = 0
     let currentTime = 0;
 
@@ -129,20 +142,81 @@
         else
             pause();
     }
-    
+
+    stop.onclick = ()=>{
+        if(active){
+            reset();
+            timer.textContent = calculateTime(sessionValue)
+        }
+    }
+
+
+    /*
     const start = ()=>{
         startTime = Date.now() - runningTime
         interval = setInterval(()=>{
             const time = Date.now() - startTime
             currentTime =  sessionTime - ( Math.floor(time / 1000) ) 
             timer.textContent = calculateTime(currentTime)
+            if(currentTime===0 && !isBreak){
+                isBreak = true
+                sessionTime = breakTime
+                startTime = Date.now()
+            }else if(currentTime===0 ){
+                pause()
+                console.log('Finish')
+            }
+        },1000)
+    }
+    */
+    
+
+    const start = ()=>{
+        console.log('Click')
+        interval = setInterval(()=>{
+            console.log(accumulatedTime)
+            currentTime =  sessionTime - runningTime++
+            accumulatedTime++
+            timer.textContent = calculateTime(currentTime)
+            tittle.textContent = calculateTime(currentTime)
+            if(currentTime===0 && !isBreak){
+                setBreak()
+            }else if(currentTime===0 ){
+                reset()
+                sessions++
+                updateSessions()
+                updateAccumulatedTime()
+            }
         },1000)
     }
 
-
     const pause = ()=>{
-        sessionTime = currentTime
         clearInterval(interval)
+    }
+
+    const setBreak = ()=>{
+        isBreak = true
+        sessionTime = breakTime
+        runningTime = 0
+    }
+
+    const reset = ()=>{
+        pause()
+        isBreak = false
+        console.log('Finish')
+        runningTime = 0
+        sessionTime = sessionValue
+        active = false
+    }
+
+    const updateSessions = ()=>{
+        const sessionsLabel = document.getElementById('sessions')
+        sessionsLabel.textContent = sessions
+    }
+
+    const updateAccumulatedTime = ()=>{ 
+        document.getElementById('accumulatedTime')
+                .innerText = calculateTimeByMinutes(accumulatedTime)
     }
 
     const calculateTime = value => {
@@ -159,10 +233,27 @@
         return  ( (hours * 60) + minutes) + ':' + seconds; // Return in HH:MM:SS format
         }
     }
+
+    const calculateTimeByMinutes = (seconds)=>{
+        if(seconds < 60){
+            return '0:00'
+        }
+        let hours = Math.floor(seconds / 3600);
+        let minutes = Math.floor((seconds - hours * 3600) / 60);
+        minutes = minutes < 10 ? '0' + minutes : minutes
+
+        return `${hours}:${minutes}`
+    }
     
-
-
+    console.log( calculateTime(0) )
+    
+    
     /*
+    fetch('http://example.com/movies.json')
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+   
         Set time
     */
 
@@ -208,7 +299,6 @@
             meridian = 'AM'
         }   
         clock.textContent = `${hours}:${minutes} ${meridian}`
-        console.log(today.getSeconds())
     },1000)
 
     /*
