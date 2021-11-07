@@ -1,7 +1,8 @@
+@import 'switch';
+
 *{
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
-
 
 body{
     margin: 0;
@@ -15,6 +16,10 @@ body{
         height: 100%;
         min-width: 100%;
     }
+}
+
+.col-3{
+    width: 31.5%;
 }
 
 main{
@@ -159,6 +164,7 @@ main{
     }
 
     .title-task{
+        font-size: 18px;
         text-transform: none;
     }
 }
@@ -225,3 +231,119 @@ main{
         width: 38px;
     }
 }
+
+.modal{
+    display: none;
+    //transition: all 0.2s ease-out;
+    background-color: #0000009d;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    &.active{
+        display: block;
+        visibility: visible;
+        //transition: 0.2s;
+    }
+}
+
+.form-container{
+    background-color: #131a21;
+    color: #fff;
+    max-width: 600px;
+    border-radius: 8px;
+    padding: 1.5rem;
+    z-index: 10;
+    position: absolute;
+    //left: 33%;
+    top: 20%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+
+    
+    #closeModal{
+        float: right;
+        cursor: pointer;
+    }
+
+    h2{
+        font-weight: 600;
+        margin-bottom: 0;
+        margin-top: 0;
+        font-size: 26px;
+    }
+    .title-form{
+        font-weight: 300;
+        font-size: 16px;
+        //border-bottom: 1px solid #9f9f9f;
+        padding-bottom: 7px;
+        margin-bottom: 5px;
+    }
+    .row{
+        display: flex;
+        justify-content: space-between;
+    }
+    label{
+        display: flex;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    input, select{
+        background-color: #303843;
+        border: none;
+        padding: 5px;
+        color: #fff;
+        width: 100%;
+        box-sizing: border-box;
+        &:focus{
+            outline: none;
+        }
+    }
+    .form-group{
+        margin-top: 10px;
+    }
+    .form-section{
+        padding: 5px 0;
+        box-sizing: border-box;
+    }
+
+    .description{
+        font-size: 20px;
+        font-weight: 100;
+    }
+
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        opacity: 0.4;
+    }
+}
+
+#pomodoro-config{
+    cursor: pointer;
+    opacity: 0.55;
+    transition: 0.2s;
+    position: relative;
+    &:hover{
+        opacity: 1;
+        &::after{
+            top: 0px;
+            position: absolute;
+            margin-left: 4px;
+            padding: 4px 5px;
+            font-size: 14px;
+            text-transform: capitalize;
+            content: 'Settings';
+            background-color: #303843;
+        }
+    }
+    img{
+        width: 20px;
+    }
+}
+

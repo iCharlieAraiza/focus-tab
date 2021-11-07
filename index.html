@@ -63,7 +63,7 @@
             <div class="clock-container active">
                 <div class="button-container col-5">
                     <ul>
-                        <li>Timer</li>
+                        <li>Timer <span id="pomodoro-config"><img src="assets/img/icons/config.png" alt="" srcset=""></span></li>
                     </ul>
                 </div>
                 <div class="timer">
@@ -110,13 +110,117 @@
                 </div>
             </div>
         </section>
+
+        <section id="pomodoro-settings" class="modal">
+            <div class="form-container">
+                <div class="head-section">
+                    <div id="closeModal">
+                        &#x2715;
+                    </div>
+                    <div class="wrapper">
+                        <h2>Pomodoro Settings</h2>
+                        <div class="description">Timer settings</div>
+                        <form action="">
+                            <div class="form-group">
+                                <div class="title-form">
+                                    Time (minutes)
+                                </div>
+                                <div class="row">
+                                    <div class="form-section col-3">
+                                        <label for="">Pomodoro</label>
+                                        <div class="input-container">
+                                            <input type="number" id="pomodoroInput" min="0" value="25">
+                                        </div>
+                                    </div>
+                                    <div class="form-section col-3">
+                                        <label for="">Short break</label>
+                                        <div class="input-container">
+                                            <input type="number" min="0" value="5">
+                                        </div>
+                                    </div>
+                                    <div class="form-section col-3">
+                                        <label for="">Long break</label>
+                                        <div class="input-container">
+                                            <input type="number" min="0" value="15">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="title-form">
+                                    Configuration
+                                </div>
+                                <div class="row">
+                                    <div class="form-section col-3">
+                                        <label for="">Alarm sound</label>
+                                        <div class="input-container">
+                                            <select id="sounds" name="sounds">
+                                                <option value="beep">Beep</option>
+                                                <option value="classical">classical</option>
+                                            </select>                                        </div>
+                                        </div>
+                                    <div class="form-section col-3">
+                                        <label for="">Long break interval</label>
+                                        <div class="input-container">
+                                            <input type="number" min="0" value="5">
+                                        </div>
+                                    </div>
+                                    <div class="form-section col-3">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="form-section col-3">
+                                        <label for="">Autostart session</label>
+                                        <div class="input-container">
+                                            <label class="switch">
+                                                <input type="checkbox">
+                                                <span class="slider round"></span>
+                                            </label>                                                                                  
+                                        </div>
+                                    </div>
+                                    <div class="form-section col-3">
+                                        <label for="">Autostart break</label>
+                                        <div class="input-container">
+                                            <label class="switch">
+                                                <input type="checkbox" checked>
+                                                <span class="slider round"></span>
+                                            </label>                                               </div>
+                                    </div>
+                                    <div class="form-section col-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+    <audio id="pressSound" src="/assets/audio/button-press.wav"></audio>
+    <audio id="bellSound" src="/assets/audio/bell.wav"></audio>
 <script>
-    let sessionValue = 7,
+    
+    let sessionValue = 25,
         breakValue = 3,
         sessions = 0,
         accumulatedTime = 0;
+    
+    /*
+        Modal
+    */
 
+
+    const modal = document.getElementById('pomodoro-settings')
+    const closeBtn = document.getElementById('closeModal')
+    const configBtn = document.getElementById('pomodoro-config')
+    const pomodoroInput = document.getElementById('pomodoroInput')
+    
+    const pressSound = document.getElementById('pressSound')
+    const bellSound = document.getElementById('bellSound')
+
+    sessionValue = pomodoroInput.value * 60
 
     let sessionTime = sessionValue,
         breakTime = breakValue,
@@ -124,6 +228,21 @@
         interval = '',
         runningTime = 0,
         isBreak = false
+
+    pomodoroInput.addEventListener('change', ()=>{
+        sessionValue = pomodoroInput.value * 60
+        initialize()
+    })
+
+    closeBtn.onclick = ()=>{
+        modal.classList.toggle('active')
+    }
+
+    configBtn.onclick = ()=>{
+        modal.classList.toggle('active')
+    }
+
+
 
     const timer = document.querySelector('.timer .time')
     const clock = document.querySelector('.clock .time')
@@ -135,7 +254,10 @@
     let startTime = 0
     let currentTime = 0;
 
+    
+
     play.onclick = ()=>{
+        pressSound.play();
         active = !active
         if(active)
             start();
@@ -169,7 +291,13 @@
         },1000)
     }
     */
-    
+
+    const initialize = ()=>{
+        sessionTime = sessionValue
+        const time = sessionTime == 0 ? 25*60 : sessionTime
+        timer.innerText = calculateTime(time)
+    }
+
 
     const start = ()=>{
         console.log('Click')
@@ -180,8 +308,10 @@
             timer.textContent = calculateTime(currentTime)
             tittle.textContent = calculateTime(currentTime)
             if(currentTime===0 && !isBreak){
+                bellSound.play();
                 setBreak()
             }else if(currentTime===0 ){
+                bellSound.play();
                 reset()
                 sessions++
                 updateSessions()
@@ -247,6 +377,13 @@
     
     console.log( calculateTime(0) )
     
+    /*
+        Execution flow
+    */
+
+    initialize();
+
+
     
     /*
     fetch('http://example.com/movies.json')
