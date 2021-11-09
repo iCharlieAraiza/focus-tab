@@ -211,7 +211,6 @@
         Modal
     */
 
-
     const modal = document.getElementById('pomodoro-settings')
     const closeBtn = document.getElementById('closeModal')
     const configBtn = document.getElementById('pomodoro-config')
@@ -252,7 +251,7 @@
     const tittle = document.querySelector('title')
 
     let startTime = 0
-    let currentTime = 0;
+    let currentTime = 0
 
     
 
@@ -310,7 +309,7 @@
             if(currentTime===0 && !isBreak){
                 bellSound.play();
                 setBreak()
-            }else if(currentTime===0 ){
+            }else if(currentTime === 0 ){
                 bellSound.play();
                 reset()
                 sessions++
@@ -468,8 +467,7 @@
         taskList.push({status:active, value:taskform.value})
 
         let newList = '';
-
-        taskList.fo
+        //taskList.fo
 
         listContainer.innerHTML =  '';
 
