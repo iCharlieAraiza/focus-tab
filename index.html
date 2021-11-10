@@ -87,14 +87,6 @@
                         </div>
                         <div class="todo-container">
                             <ul id="listContainer">
-                                <li>
-                                    <span class="select-circle"></span>
-                                    <div class="title-task">New Task</div>
-                                </li>
-                                <li>
-                                    <span class="select-circle"></span>
-                                    <div class="title-task">New Task</div>
-                                </li>
                             </ul>
                         </div>
                         <div class="todo-form">
@@ -253,8 +245,6 @@
     let startTime = 0
     let currentTime = 0
 
-    
-
     play.onclick = ()=>{
         pressSound.play();
         active = !active
@@ -270,8 +260,6 @@
             timer.textContent = calculateTime(sessionValue)
         }
     }
-
-
     /*
     const start = ()=>{
         startTime = Date.now() - runningTime
@@ -438,45 +426,86 @@
     },1000)
 
     /*
-    let hours = today.getHours()
-    let medridian = ''
-    
-    if(hours > 12){
-        hours = hours - 12
-        meridian = 'PM'
-    }else{
-        meridian = 'AM'
-    }   
-
-    console.log( `${hours}:${today.getMinutes()} ${meridian}` )
-
-    //console.log(hours + ":" + today.getMinutes())
-
-
-
-    /*
         To-do App
     */
 
-    const taskList = [{}];
+    let taskList = [{}];
 
-    const taskform = document.querySelector('#taskform'),
-    listContainer = document.querySelector('#listContainer')
+    const taskform = document.querySelector('#taskform')
+    const listContainer = document.querySelector('#listContainer')
 
-    taskform.addEventListener('change', (event)=>{
-        taskList.push({status:active, value:taskform.value})
 
-        let newList = '';
-        //taskList.fo
+    const createTask = (task)=>{
+        const id = task.id === undefined ? incrementId() : task.id;
+        taskList.push({id:id, status:active, value:task.value})
+        
+        const newTask = document.createElement('li')
+        const circle = document.createElement('span')
+        const text = document.createElement('div')
 
-        listContainer.innerHTML =  '';
+        circle.classList.add('select-circle')
+        text.classList.add('title-task')
+        text.innerText = task.value;
+        circle.id = id;
 
+        circle.addEventListener('click', (event)=>{
+            alert('Click')
+        })
+
+        newTask.appendChild(circle)
+        newTask.appendChild(text)
+        return newTask
+    }
+
+
+
+    taskform.addEventListener('keyup', (event)=>{
+        if(event.keyCode === 13){
+            const task = createTask(taskform);
+            listContainer.appendChild(task)
+        }
     })
 
+    // Create a method to render the list
+    const renderList = ()=>{
+        taskList.innerHTML = ''
+        taskList.forEach(taskValue=>{
+            /*
+            const task = document.createElement('li')
+            const circle = document.createElement('span')
+            const text = document.createElement('div')
+            circle.classList.add('select-circle')
+            text.classList.add('title-task')
+            text.innerText = taskValue.value;
+            circle.id = taskValue.id
+            circle.addEventListener('click', (event)=>{
+                alert('Click')
+            })
+            task.appendChild(circle)
+            task.appendChild(text)
+            */
+            const task = createTask(taskValue);
+            listContainer.appendChild(task)
+        })
+    }
 
+    //Auto increment id
+    const incrementId = ()=>{
+        let id = 0
+        taskList.forEach(task=>{
+            if(task.id > id){
+                id = task.id
+            }
+        })
+        return id + 1
+    }
+
+    taskList = [{id:1, status:true, value:'Task 1'},{status:false, id:2, value:'Task 2'}]
     
+    renderList()
 
 
 </script>
 </body>
 </html>
+
