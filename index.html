@@ -192,6 +192,8 @@
     </main>
     <audio id="pressSound" src="/assets/audio/button-press.wav"></audio>
     <audio id="bellSound" src="/assets/audio/bell.wav"></audio>
+
+    <script src="node_modules/sortablejs/Sortable.js"></script>
 <script>
     
     let sessionValue = 25,
@@ -528,8 +530,19 @@
     
     renderList()
 
+</script>
+
+<script>
+
+    var el = document.getElementById('listContainer');
+    
+    new Sortable(el, {
+        animation: 150,
+        ghostClass: 'blue-background-class'
+    }); 
 
 </script>
+
 </body>
 </html>
 
