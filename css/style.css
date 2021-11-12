@@ -259,6 +259,23 @@ main {
   text-transform: none;
 }
 
+.task-container .selected .title-task {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-container .selected .select-circle {
+  background-image: url("/assets/img/icons/check-mini.png") repeat;
+  background-color: #94979b;
+}
+
+.task-container .selected .select-circle:after {
+  background-image: url("/assets/img/icons/check-mini.png");
+  color: #131a21;
+  position: absolute;
+  top: 0;
+}
+
 .todo-form {
   padding: 1.5rem 1rem;
 }

@@ -167,6 +167,21 @@ main{
         font-size: 18px;
         text-transform: none;
     }
+
+    .selected{
+        .title-task{
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        .select-circle{
+            &:after{
+                background-image: url("/assets/img/icons/check-mini.png");
+                color: #131a21;
+                position: absolute;
+                top: 0;
+            }            background-color: #94979b;
+        }
+    }
 }
 
 .todo-form{

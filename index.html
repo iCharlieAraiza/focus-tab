@@ -436,20 +436,25 @@
 
 
     const createTask = (task)=>{
-        const id = task.id === undefined ? incrementId() : task.id;
-        taskList.push({id:id, status:active, value:task.value})
+        const id = task.id;
         
         const newTask = document.createElement('li')
         const circle = document.createElement('span')
         const text = document.createElement('div')
 
+        newTask.classList.add('task')
         circle.classList.add('select-circle')
         text.classList.add('title-task')
         text.innerText = task.value;
         circle.id = id;
 
         circle.addEventListener('click', (event)=>{
-            alert('Click')
+            const task = taskList.find(task => task.id === id)
+            task.status = !task.status
+            newTask.classList.toggle('selected')
+            changeStatus(id)
+            console.log(taskList)
+            //alert('Task completed')
         })
 
         newTask.appendChild(circle)
@@ -457,12 +462,31 @@
         return newTask
     }
 
-
+    //Change the task status
+    const changeStatus = (id)=>{
+        taskList.forEach(task=>{
+            if(task.id === id){
+                task.status = !task.status
+            }
+        })
+    }
 
     taskform.addEventListener('keyup', (event)=>{
         if(event.keyCode === 13){
-            const task = createTask(taskform);
+            const newTask = {
+                id: incrementId(),
+                value: event.target.value,
+                status: false
+            }
+            taskList.push({
+                id: incrementId(),
+                value: taskform.value,
+                status: false
+            })
+            const task = createTask(newTask);
             listContainer.appendChild(task)
+            
+            console.log(taskList)
         }
     })
 
