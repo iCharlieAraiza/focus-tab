@@ -127,7 +127,7 @@
                                     <div class="form-section col-3">
                                         <label for="">Short break</label>
                                         <div class="input-container">
-                                            <input type="number" min="0" value="5">
+                                            <input id="breakTimeInput" type="number" min="0" value="5">
                                         </div>
                                     </div>
                                     <div class="form-section col-3">
@@ -197,7 +197,7 @@
 <script>
     
     let sessionValue = 25,
-        breakValue = 3,
+        breakValue = 60*5,
         sessions = 0,
         accumulatedTime = 0;
     
@@ -209,9 +209,11 @@
     const closeBtn = document.getElementById('closeModal')
     const configBtn = document.getElementById('pomodoro-config')
     const pomodoroInput = document.getElementById('pomodoroInput')
+    const breakTimeInput = document.getElementById('breakTimeInput')
     
     const pressSound = document.getElementById('pressSound')
     const bellSound = document.getElementById('bellSound')
+    
 
     sessionValue = pomodoroInput.value * 60
 
@@ -225,6 +227,10 @@
     pomodoroInput.addEventListener('change', ()=>{
         sessionValue = pomodoroInput.value * 60
         initialize()
+    })
+
+    breakTimeInput.addEventListener('change', ()=>{
+        breakTime = breakTimeInput.value * 60
     })
 
     closeBtn.onclick = ()=>{
@@ -262,6 +268,7 @@
             timer.textContent = calculateTime(sessionValue)
         }
     }
+
     /*
     const start = ()=>{
         startTime = Date.now() - runningTime
@@ -541,6 +548,27 @@
         animation: 150,
         ghostClass: 'blue-background-class'
     }); 
+
+
+    /*
+        Radio player
+    */
+
+    const songList = [
+        {
+        id: 1,
+        name: 'Song 1',
+        url:'https://dl.dropboxusercontent.com/s/6bwwd55lrnp2aab/chill_2.mp3'
+        },
+        {
+        id: 2,
+        name: 'Song 2',
+        url:'https://dl.dropbox.com/s/t4ppqlzsbpb7lkj/chill_4.mp3'
+        },]
+
+
+
+
 </script>
 
 

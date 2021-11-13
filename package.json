@@ -1,0 +1,22 @@
+{
+  "name": "productive-tab",
+  "version": "1.0.0",
+  "description": "☑️⏰ Web task manager that includes a timer (pomodoro) and different widgets to increase productivity.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iCharlieAraiza/focus-tab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iCharlieAraiza/focus-tab/issues"
+  },
+  "homepage": "https://github.com/iCharlieAraiza/focus-tab#readme",
+  "dependencies": {
+    "sortablejs": "^1.14.0"
+  }
+}
