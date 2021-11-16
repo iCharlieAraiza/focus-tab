@@ -166,6 +166,16 @@ main{
     .title-task{
         font-size: 18px;
         text-transform: none;
+        //Change to input
+        color:white;
+        background-color: transparent;
+        border: none;
+        &:focus{
+            outline: none;
+        }
+        &:not(:read-only){
+            color: rgb(143, 0, 24);
+        }
     }
 
     .selected{

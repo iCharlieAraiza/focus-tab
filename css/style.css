@@ -257,6 +257,21 @@ main {
 .task-container .title-task {
   font-size: 18px;
   text-transform: none;
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+.task-container .title-task:focus {
+  outline: none;
+}
+
+.task-container .title-task:not(:-moz-read-only) {
+  color: #8f0018;
+}
+
+.task-container .title-task:not(:read-only) {
+  color: #8f0018;
 }
 
 .task-container .selected .title-task {
@@ -265,7 +280,6 @@ main {
 }
 
 .task-container .selected .select-circle {
-  background-image: url("/assets/img/icons/check-mini.png") repeat;
   background-color: #94979b;
 }
 

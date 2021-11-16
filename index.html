@@ -449,12 +449,13 @@
         
         const newTask = document.createElement('li')
         const circle = document.createElement('span')
-        const text = document.createElement('div')
+        const text = document.createElement('input')
 
         newTask.classList.add('task')
         circle.classList.add('select-circle')
         text.classList.add('title-task')
-        text.innerText = task.value;
+        text.value = task.value;
+        text.readOnly = true;
         circle.id = id;
 
         circle.addEventListener('click', (event)=>{
