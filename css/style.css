@@ -238,11 +238,22 @@ main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
+  cursor: pointer;
+  height: 1.5rem;
 }
 
 .task-container .todo-container li span:first-child {
   margin-right: 1rem;
+}
+
+.task-container .todo-container li:active {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+  background-color: rgba(255, 255, 255, 0.31);
+  -webkit-transition: 0.6s ease-in-out;
+  transition: 0.6s ease-in-out;
 }
 
 .task-container .select-circle {
@@ -260,6 +271,10 @@ main {
   color: white;
   background-color: transparent;
   border: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  padding: 5px;
 }
 
 .task-container .title-task:focus {
@@ -267,11 +282,17 @@ main {
 }
 
 .task-container .title-task:not(:-moz-read-only) {
-  color: #8f0018;
+  color: white;
+  outline-color: #8383ff;
+  border-bottom: #fff 2px solid;
+  background-color: #0000008c;
 }
 
 .task-container .title-task:not(:read-only) {
-  color: #8f0018;
+  color: white;
+  outline-color: #8383ff;
+  border-bottom: #fff 2px solid;
+  background-color: #0000008c;
 }
 
 .task-container .selected .title-task {

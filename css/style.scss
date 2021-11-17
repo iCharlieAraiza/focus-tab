@@ -145,11 +145,20 @@ main{
             font-size: 1.2rem;
             display: flex;
             align-items: center;
-            margin: 1rem 0;
+            margin: 0.5rem 0;
+            padding: 0.5rem 0.5rem;
+            cursor: pointer;     
+            height: 1.5rem;
+            //transition: ease-in-out 0.2s;
             span{
                 &:first-child{
                     margin-right: 1rem;
                 }
+            }
+            &:active{
+                cursor: grabbing;
+                background-color: rgba(255, 255, 255, 0.31);
+                transition: 0.6s ease-in-out;
             }
         }
     }
@@ -170,12 +179,22 @@ main{
         color:white;
         background-color: transparent;
         border: none;
+        box-sizing: border-box;
+        width: 100%;
+        padding: 5px;
+
         &:focus{
             outline: none;
         }
+
         &:not(:read-only){
-            color: rgb(143, 0, 24);
+            color: rgb(255, 255, 255);
+            //outline: auto;
+            outline-color: rgb(131, 131, 255);
+            border-bottom: #fff 2px solid;
+            background-color: #0000008c;
         }
+        
     }
 
     .selected{

@@ -467,6 +467,27 @@
             //alert('Task completed')
         })
 
+        text.addEventListener('click', (event)=>{
+            text.readOnly = false;
+            text.focus();
+        })
+
+        text.addEventListener('keyup', (event)=>{
+            if(event.keyCode === 13){
+                text.readOnly = true;
+            }
+        })
+
+        text.addEventListener('blur', (event)=>{
+            text.readOnly = true;
+            if(text.value.trim() === ''){
+                //return task con id = text.id
+                const task = taskList.find(task => task.id === id)
+                text.value = task.value;
+            }
+        })
+
+
         newTask.appendChild(circle)
         newTask.appendChild(text)
         return newTask
@@ -483,6 +504,11 @@
 
     taskform.addEventListener('keyup', (event)=>{
         if(event.keyCode === 13){
+
+            if(event.target.value.trim() === ''){
+                return
+            }
+
             const newTask = {
                 id: incrementId(),
                 value: event.target.value,
@@ -495,6 +521,8 @@
             })
             const task = createTask(newTask);
             listContainer.appendChild(task)
+
+            event.target.value = ''
             
             console.log(taskList)
         }
@@ -504,20 +532,6 @@
     const renderList = ()=>{
         taskList.innerHTML = ''
         taskList.forEach(taskValue=>{
-            /*
-            const task = document.createElement('li')
-            const circle = document.createElement('span')
-            const text = document.createElement('div')
-            circle.classList.add('select-circle')
-            text.classList.add('title-task')
-            text.innerText = taskValue.value;
-            circle.id = taskValue.id
-            circle.addEventListener('click', (event)=>{
-                alert('Click')
-            })
-            task.appendChild(circle)
-            task.appendChild(text)
-            */
             const task = createTask(taskValue);
             listContainer.appendChild(task)
         })
