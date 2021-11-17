@@ -223,6 +223,8 @@ main {
 }
 
 .task-container .todo-container {
+  height: 14rem;
+  overflow-y: scroll;
   padding: 0 2rem 3rem 2rem;
 }
 
