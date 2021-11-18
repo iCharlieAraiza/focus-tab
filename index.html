@@ -15,7 +15,7 @@
         <section class="card-wrapper">
             <div class="container">
                 <div class="card">
-                    <h3 class="figure">
+                    <h3 class="figure" id="totalTasks">
                         19
                     </h3>
                     <h3 class="name">
@@ -23,11 +23,11 @@
                     </h3>
                 </div>
                 <div class="card">
-                    <h3 class="figure">
-                        9
+                    <h3 class="figure" id="completedTasks">
+                        0
                     </h3>
                     <h3 class="name">
-                        Pending
+                        Completed
                     </h3>
                 </div>
                 <div class="card">
@@ -442,7 +442,8 @@
 
     const taskform = document.querySelector('#taskform')
     const listContainer = document.querySelector('#listContainer')
-
+    const totalTasks = document.querySelector('#totalTasks')
+    const completedTasks = document.querySelector('#completedTasks')
 
     const createTask = (task)=>{
         const id = task.id;
@@ -464,7 +465,7 @@
             newTask.classList.toggle('selected')
             changeStatus(id)
             console.log(taskList)
-            //alert('Task completed')
+            updateCompleteTasks();
         })
 
         text.addEventListener('click', (event)=>{
@@ -497,18 +498,17 @@
     const changeStatus = (id)=>{
         taskList.forEach(task=>{
             if(task.id === id){
-                task.status = !task.status
+                task.status = (task.status) ? true : false
+                console.log(id, task.status)
             }
         })
     }
 
     taskform.addEventListener('keyup', (event)=>{
         if(event.keyCode === 13){
-
             if(event.target.value.trim() === ''){
                 return
             }
-
             const newTask = {
                 id: incrementId(),
                 value: event.target.value,
@@ -524,6 +524,7 @@
 
             event.target.value = ''
             
+            updateTotalTasks()
             console.log(taskList)
         }
     })
@@ -548,9 +549,27 @@
         return id + 1
     }
 
-    taskList = [{id:1, status:true, value:'Task 1'},{status:false, id:2, value:'Task 2'}]
+
+    const updateTotalTasks = ()=>{
+        totalTasks.textContent = taskList.length
+    }
+
+    const updateCompleteTasks = ()=>{
+        let pending = 0
+        taskList.forEach(task=>{
+            if(task.status){
+                pending++
+            }
+        })
+        completedTasks.textContent = pending
+    }
+
+    taskList = [{id:1, status:false, value:'Task 1'},{status:false, id:2, value:'Task 2'}]
     
     renderList()
+    updateTotalTasks()
+    updateCompleteTasks()
+    
 
 
     /*
