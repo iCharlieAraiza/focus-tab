@@ -167,11 +167,14 @@ main{
 
     .select-circle{
         display: block;
-        height: 0.8rem;
-        width: 0.8rem;
+        height: 1.2rem;
+        width: 1.3rem;
         border: 2px solid #fff;
         border-radius: 50%;
         cursor: pointer;
+        img{
+            display: none;
+        }
     }
 
     .title-task{
@@ -204,13 +207,21 @@ main{
             text-decoration: line-through;
             opacity: 0.6;
         }
+        
         .select-circle{
+            position: relative;
+            img{
+                width: 14px;
+                display: block;
+                position: absolute;
+                top: 3px;
+                left: 3px;
+            }
             &:after{
-                background-image: url("/assets/img/icons/check-mini.png");
                 color: #131a21;
                 position: absolute;
                 top: 0;
-            }            background-color: #94979b;
+            }   background-color: #2d4361;
         }
     }
 }

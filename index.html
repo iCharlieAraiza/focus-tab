@@ -451,9 +451,12 @@
         const newTask = document.createElement('li')
         const circle = document.createElement('span')
         const text = document.createElement('input')
+        const checkImg = document.createElement('img')
 
         newTask.classList.add('task')
         circle.classList.add('select-circle')
+        checkImg.src = './assets/img/icons/check-mini.png'
+        circle.appendChild(checkImg)
         text.classList.add('title-task')
         text.value = task.value;
         text.readOnly = true;
