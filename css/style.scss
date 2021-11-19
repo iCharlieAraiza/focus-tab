@@ -40,6 +40,8 @@ main{
     flex-wrap: wrap;
     padding: 1rem;
     justify-content: space-between;
+    background: rgb(0,0,0);
+    background: linear-gradient(180deg, rgba(0,0,0,0.6881127450980392) 0%, rgba(0,0,0,0) 70%);
 
     h3{
         font-weight: 100;
@@ -69,6 +71,9 @@ main{
     }
 
     .menu-wrap{
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
         span{
             position: relative;
             height: 30px;
@@ -78,7 +83,7 @@ main{
                     opacity: 1;
                 }
                 &::after{
-                    top: -12px;
+                    top: 0px;
                     position: absolute;
                     margin-left: 4px;
                     padding: 4px 5px;
@@ -92,7 +97,7 @@ main{
         img{
             width: 30px;
             cursor: pointer;
-            opacity: 0.7;
+            opacity: 0.8;
 
         }   
     }

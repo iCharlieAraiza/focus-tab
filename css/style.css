@@ -106,6 +106,9 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  background: black;
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.688113)), color-stop(70%, rgba(0, 0, 0, 0)));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.688113) 0%, rgba(0, 0, 0, 0) 70%);
 }
 
 .card-wrapper h3 {
@@ -140,6 +143,16 @@ main {
   width: 28px;
 }
 
+.card-wrapper .menu-wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 1rem;
+}
+
 .card-wrapper .menu-wrap span {
   position: relative;
   height: 30px;
@@ -152,7 +165,7 @@ main {
 }
 
 .card-wrapper .menu-wrap span:hover::after {
-  top: -12px;
+  top: 0px;
   position: absolute;
   margin-left: 4px;
   padding: 4px 5px;
@@ -165,7 +178,7 @@ main {
 .card-wrapper .menu-wrap img {
   width: 30px;
   cursor: pointer;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .main-section {
