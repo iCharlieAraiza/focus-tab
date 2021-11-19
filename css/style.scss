@@ -39,6 +39,8 @@ main{
     text-align: center;
     flex-wrap: wrap;
     padding: 1rem;
+    justify-content: space-between;
+
     h3{
         font-weight: 100;
         margin: 0;
@@ -48,11 +50,12 @@ main{
         align-items: center;
     }
     .figure{
-        font-size: 2.3rem;
+        font-size: 2.2rem;
         font-weight: 300;
     }
     .name{
         text-transform: capitalize;
+        font-size: 18px;
     }
     //Card section
     .card{
@@ -61,8 +64,37 @@ main{
 
     .icon{
         img{
-            width: 32px;
+            width: 28px;
         }
+    }
+
+    .menu-wrap{
+        span{
+            position: relative;
+            height: 30px;
+            transition: 0.5s ease-in-out;
+            &:hover{
+                img{
+                    opacity: 1;
+                }
+                &::after{
+                    top: -12px;
+                    position: absolute;
+                    margin-left: 4px;
+                    padding: 4px 5px;
+                    font-size: 14px;
+                    text-transform: capitalize;
+                    content: 'Menu';
+                    background-color: #303843;
+                }   
+            }
+        }
+        img{
+            width: 30px;
+            cursor: pointer;
+            opacity: 0.7;
+
+        }   
     }
 }
 

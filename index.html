@@ -13,6 +13,11 @@
     </div>
     <main>
         <section class="card-wrapper">
+            <div class="menu-wrap">
+                <span>
+                    <img src="/assets/img/icons/menu.png" alt="" srcset="">
+                </span>
+            </div>
             <div class="container">
                 <div class="card">
                     <h3 class="figure" id="totalTasks">
@@ -27,7 +32,7 @@
                         0
                     </h3>
                     <h3 class="name">
-                        Completed
+                        Pending
                     </h3>
                 </div>
                 <div class="card">
@@ -560,7 +565,7 @@
     const updateCompleteTasks = ()=>{
         let pending = 0
         taskList.forEach(task=>{
-            if(task.status){
+            if(!task.status){
                 pending++
             }
         })

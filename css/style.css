@@ -103,6 +103,9 @@ main {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   padding: 1rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 .card-wrapper h3 {
@@ -120,12 +123,13 @@ main {
 }
 
 .card-wrapper .figure {
-  font-size: 2.3rem;
+  font-size: 2.2rem;
   font-weight: 300;
 }
 
 .card-wrapper .name {
   text-transform: capitalize;
+  font-size: 18px;
 }
 
 .card-wrapper .card {
@@ -133,7 +137,35 @@ main {
 }
 
 .card-wrapper .icon img {
-  width: 32px;
+  width: 28px;
+}
+
+.card-wrapper .menu-wrap span {
+  position: relative;
+  height: 30px;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+}
+
+.card-wrapper .menu-wrap span:hover img {
+  opacity: 1;
+}
+
+.card-wrapper .menu-wrap span:hover::after {
+  top: -12px;
+  position: absolute;
+  margin-left: 4px;
+  padding: 4px 5px;
+  font-size: 14px;
+  text-transform: capitalize;
+  content: 'Menu';
+  background-color: #303843;
+}
+
+.card-wrapper .menu-wrap img {
+  width: 30px;
+  cursor: pointer;
+  opacity: 0.7;
 }
 
 .main-section {
