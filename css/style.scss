@@ -74,7 +74,7 @@ main{
         display: flex;
         align-items: center;
         margin-left: 1rem;
-        span{
+        #menuBtn{
             position: relative;
             height: 30px;
             transition: 0.5s ease-in-out;
@@ -91,6 +91,7 @@ main{
                     text-transform: capitalize;
                     content: 'Menu';
                     background-color: #303843;
+                    z-index: 8;
                 }   
             }
         }
@@ -99,7 +100,48 @@ main{
             cursor: pointer;
             opacity: 0.8;
 
-        }   
+        } 
+        .menu{
+            display: none;
+            position: absolute;
+            z-index: 1;
+            margin-left: 3rem;
+            background-color: rgba(19, 26, 33, 0.85);
+            top: 2rem;
+            min-width: 20rem;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            ul{
+                list-style: none;
+                padding: 0;
+                li{
+                    text-align: left;
+                    margin: 1rem 0;
+                }
+                .menu-item{
+                    color: #fff;
+                    text-decoration: none;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                }
+                .iconMenu{
+                    margin-right: 10px;
+                    img{
+                        width: 28px;
+                    }
+                }
+            }
+            .left-section{
+                width: 30%;
+            }
+            .rigth-section{
+                width: 70%;
+            }
+            &.active{
+                display: flex;
+            }
+        }  
     }
 }
 
@@ -174,7 +216,7 @@ main{
     }
 
     .todo-container{
-        height: 14rem;
+        height: 15.5rem;
         overflow-y: scroll;
         padding: 0 2rem 3rem 2rem;
         ul{

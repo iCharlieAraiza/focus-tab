@@ -14,9 +14,40 @@
     <main>
         <section class="card-wrapper">
             <div class="menu-wrap">
-                <span>
+                <span id="menuBtn">
                     <img src="/assets/img/icons/menu.png" alt="" srcset="">
                 </span>
+                <div class="menu">
+                    <div class="left-section">
+                        <ul>
+                            <li>
+                                <div class="menu-item">
+                                    <span class="iconMenu"> <img src="/assets/img/icons/gallery.png" alt=""></span>
+                                    Themes
+                                </div>
+                            </li>                             
+                            <li>
+                                <div class="menu-item">
+                                    <span class="iconMenu"> <img src="/assets/img/icons/sound.png" alt=""></span>
+                                    Sounds
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item">
+                                    <span class="iconMenu"> <img src="/assets/img/icons/radio.png" alt=""></span>
+                                    Radio
+                                </div>
+                            </li>                        
+                        </ul>
+                    </div>
+                    <div class="rigth-section">
+                        <section>
+                            <div class="container">
+                                <h2>Hello</h2>
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <div class="card">
@@ -32,7 +63,7 @@
                         0
                     </h3>
                     <h3 class="name">
-                        Pending
+                        Completed
                     </h3>
                 </div>
                 <div class="card">
@@ -126,13 +157,13 @@
                                     <div class="form-section col-3">
                                         <label for="">Pomodoro</label>
                                         <div class="input-container">
-                                            <input type="number" id="pomodoroInput" min="0" value="25">
+                                            <input type="number" id="pomodoroInput" min="1" value="25">
                                         </div>
                                     </div>
                                     <div class="form-section col-3">
                                         <label for="">Short break</label>
                                         <div class="input-container">
-                                            <input id="breakTimeInput" type="number" min="0" value="5">
+                                            <input id="breakTimeInput" type="number" min="1" value="5">
                                         </div>
                                     </div>
                                     <div class="form-section col-3">
@@ -211,11 +242,14 @@
     */
 
     const modal = document.getElementById('pomodoro-settings')
+    const menu = document.querySelector('.menu')
+    const menuBtn = document.getElementById('menuBtn')
     const closeBtn = document.getElementById('closeModal')
     const configBtn = document.getElementById('pomodoro-config')
     const pomodoroInput = document.getElementById('pomodoroInput')
     const breakTimeInput = document.getElementById('breakTimeInput')
     
+
     const pressSound = document.getElementById('pressSound')
     const bellSound = document.getElementById('bellSound')
     
@@ -246,6 +280,10 @@
         modal.classList.toggle('active')
     }
 
+    menuBtn.onclick = ()=>{
+        menu.classList.toggle('active')
+    }
+
 
 
     const timer = document.querySelector('.timer .time')
@@ -274,25 +312,6 @@
         }
     }
 
-    /*
-    const start = ()=>{
-        startTime = Date.now() - runningTime
-        interval = setInterval(()=>{
-            const time = Date.now() - startTime
-            currentTime =  sessionTime - ( Math.floor(time / 1000) ) 
-            timer.textContent = calculateTime(currentTime)
-            if(currentTime===0 && !isBreak){
-                isBreak = true
-                sessionTime = breakTime
-                startTime = Date.now()
-            }else if(currentTime===0 ){
-                pause()
-                console.log('Finish')
-            }
-        },1000)
-    }
-    */
-
     const initialize = ()=>{
         sessionTime = sessionValue
         const time = sessionTime == 0 ? 25*60 : sessionTime
@@ -302,14 +321,17 @@
 
     const start = ()=>{
         console.log('Click')
+        let currentTimerStart = Date.now();
         interval = setInterval(()=>{
-            console.log(accumulatedTime)
-            currentTime =  sessionTime - runningTime++
+            let time = (Date.now() - currentTimerStart);
+            time = Math.floor(time / 1000)
+            currentTime =  sessionTime - time
             accumulatedTime++
             timer.textContent = calculateTime(currentTime)
             tittle.textContent = calculateTime(currentTime)
             if(currentTime===0 && !isBreak){
                 bellSound.play();
+                currentTimerStart = Date.now()+10;
                 setBreak()
             }else if(currentTime === 0 ){
                 bellSound.play();
@@ -323,6 +345,7 @@
 
     const pause = ()=>{
         clearInterval(interval)
+        sessionTime = currentTime
     }
 
     const setBreak = ()=>{
@@ -359,9 +382,9 @@
         if ( (hours * 60) + minutes < 10 ) { minutes = `0${minutes}`}
         if (seconds < 10) {      seconds = '0' + seconds;    }
         if (hours == 0) {
-        return minutes + ':' + seconds; // Return in MM:SS format
+            return minutes + ':' + seconds; // Return in MM:SS format
         } else {
-        return  ( (hours * 60) + minutes) + ':' + seconds; // Return in HH:MM:SS format
+            return  ( (hours * 60) + minutes) + ':' + seconds; // Return in HH:MM:SS format
         }
     }
 
@@ -565,7 +588,7 @@
     const updateCompleteTasks = ()=>{
         let pending = 0
         taskList.forEach(task=>{
-            if(!task.status){
+            if(task.status){
                 pending++
             }
         })
