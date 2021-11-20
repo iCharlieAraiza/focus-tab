@@ -21,29 +21,34 @@
                     <div class="left-section">
                         <ul>
                             <li>
-                                <div class="menu-item">
-                                    <span class="iconMenu"> <img src="/assets/img/icons/gallery.png" alt=""></span>
+                                <div class="menu-item" data-tab-target="#theme">
+                                    <span  class="iconMenu"> <img src="/assets/img/icons/gallery.png" alt=""></span>
                                     Themes
                                 </div>
                             </li>                             
                             <li>
-                                <div class="menu-item">
+                                <div class="menu-item" data-tab-target="#sounds">
                                     <span class="iconMenu"> <img src="/assets/img/icons/sound.png" alt=""></span>
                                     Sounds
                                 </div>
                             </li>
                             <li>
-                                <div class="menu-item">
+                                <div class="menu-item" data-tab-target="#radio">
                                     <span class="iconMenu"> <img src="/assets/img/icons/radio.png" alt=""></span>
                                     Radio
                                 </div>
                             </li>                        
                         </ul>
                     </div>
-                    <div class="rigth-section">
-                        <section>
+                    <div class="right-section">
+                        <section data-tab-content id="theme" >
                             <div class="container">
-                                <h2>Hello</h2>
+                                <h2>Select theme</h2>
+                            </div>
+                        </section>
+                        <section  data-tab-content id="sounds">
+                            <div class="container">
+                                <h2>How are you</h2>
                             </div>
                         </section>
                     </div>
@@ -602,6 +607,27 @@
     updateCompleteTasks()
     
 
+    /*
+        Menu section
+    */
+
+
+    const tabs = document.querySelectorAll('[data-tab-target]')
+    const tabContents = document.querySelectorAll('[data-tab-content]')
+
+    tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const target = document.querySelector(tab.dataset.tabTarget)
+        tabContents.forEach(tabContent => {
+            tabContent.classList.remove('active')
+        })
+        tabs.forEach(tab => {
+            tab.classList.remove('active')
+        })
+        tab.classList.add('active')
+        target.classList.add('active')
+    })
+    })
 
     /*
         Drag and drop

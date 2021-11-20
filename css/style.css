@@ -190,6 +190,7 @@ main {
   background-color: rgba(19, 26, 33, 0.85);
   top: 2rem;
   min-width: 20rem;
+  width: 25rem;
   border-radius: 8px;
   padding: 1rem 2rem;
 }
@@ -228,8 +229,17 @@ main {
   width: 30%;
 }
 
-.card-wrapper .menu-wrap .menu .rigth-section {
+.card-wrapper .menu-wrap .menu .right-section {
   width: 70%;
+  padding-left: 1rem;
+}
+
+.card-wrapper .menu-wrap .menu section {
+  display: none;
+}
+
+.card-wrapper .menu-wrap .menu section.active {
+  display: block;
 }
 
 .card-wrapper .menu-wrap .menu.active {
