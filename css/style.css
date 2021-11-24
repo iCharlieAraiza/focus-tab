@@ -192,7 +192,7 @@ main {
   min-width: 20rem;
   width: 25rem;
   border-radius: 8px;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 2rem 2rem;
 }
 
 .card-wrapper .menu-wrap .menu ul {
@@ -232,6 +232,40 @@ main {
 .card-wrapper .menu-wrap .menu .right-section {
   width: 70%;
   padding-left: 1rem;
+  height: 13rem;
+  overflow-y: scroll;
+}
+
+.card-wrapper .menu-wrap .menu .right-section h2 {
+  font-weight: 200;
+  margin: 0;
+  padding: 1rem 0;
+  font-size: 22px;
+}
+
+.card-wrapper .menu-wrap .menu .right-section .wrapper-el {
+  text-align: initial;
+}
+
+.card-wrapper .menu-wrap .menu .right-section .theme-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.card-wrapper .menu-wrap .menu .right-section .container-card {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card-wrapper .menu-wrap .menu .right-section .container-card img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  max-height: 100%;
+  height: 20px;
 }
 
 .card-wrapper .menu-wrap .menu section {
