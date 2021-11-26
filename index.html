@@ -507,7 +507,7 @@
         const text = document.createElement('input')
         const checkImg = document.createElement('img')
         const editBtn = document.createElement('button')
-
+        const editMenu = document.createElement('div')
 
         newTask.classList.add('task')
         circle.classList.add('select-circle')
@@ -519,6 +519,9 @@
         circle.id = id;
         editBtn.classList.add('edit-btn')
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
+        editMenu.classList.add('edit-menu')
+        editMenu.innerHTML = `<ul><li>Edit</li><li>Delete</li></ul>`
+
 
         circle.addEventListener('click', (event)=>{
             const task = taskList.find(task => task.id === id)
@@ -527,6 +530,16 @@
             changeStatus(id)
             console.log(taskList)
             updateCompleteTasks();
+        })
+
+        editBtn.addEventListener('click', (event)=>{
+            editMenu.classList.toggle('show')
+        })
+        
+        document.addEventListener('click', (event)=>{
+            if(!event.target.closest('.edit-btn')){
+                editMenu.classList.remove('show')
+            }
         })
 
         text.addEventListener('dblclick', (event)=>{
@@ -549,10 +562,10 @@
             }
         })
 
-
         newTask.appendChild(circle)
         newTask.appendChild(text)
         newTask.appendChild(editBtn)
+        newTask.appendChild(editMenu)
         return newTask
     }
 
@@ -631,12 +644,10 @@
     renderList()
     updateTotalTasks()
     updateCompleteTasks()
-    
 
     /*
         Menu section
     */
-
 
     const tabs = document.querySelectorAll('[data-tab-target]')
     const tabContents = document.querySelectorAll('[data-tab-content]')

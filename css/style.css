@@ -253,15 +253,17 @@ main {
 
 .card-wrapper .menu-wrap .menu .right-section {
   width: 70%;
-  padding-left: 1rem;
-  height: 13rem;
+  padding: 0 2rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  height: 11rem;
   overflow-y: scroll;
 }
 
 .card-wrapper .menu-wrap .menu .right-section h2 {
   font-weight: 200;
   margin: 0;
-  padding: 1rem 0;
+  padding-bottom: 1rem;
   font-size: 22px;
 }
 
@@ -280,7 +282,7 @@ main {
 .card-wrapper .menu-wrap .menu .right-section .container-card {
   border-radius: 5px;
   overflow: hidden;
-  height: 80px;
+  height: 60px;
 }
 
 .card-wrapper .menu-wrap .menu .right-section .container-card img {
@@ -288,7 +290,7 @@ main {
      object-fit: cover;
   width: 100%;
   max-height: 100%;
-  height: 80px;
+  height: 60px;
 }
 
 .card-wrapper .menu-wrap .menu section {
@@ -432,7 +434,7 @@ main {
 .task-container .select-circle {
   display: block;
   height: 1.2rem;
-  width: 1.3rem;
+  width: 1.4rem;
   border: 2px solid #fff;
   border-radius: 50%;
   cursor: pointer;
@@ -446,10 +448,53 @@ main {
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: block;
 }
 
 .task-container .edit-btn img {
   width: 1.2rem;
+}
+
+.task-container .edit-btn:hover {
+  opacity: 1;
+}
+
+.task-container .edit-btn:hover::after {
+  color: #fff;
+  position: absolute;
+  z-index: 3;
+  margin-left: -1px;
+  padding: 4px 5px;
+  font-size: 14px;
+  text-transform: capitalize;
+  content: 'More';
+  background-color: #303843;
+}
+
+.task-container .edit-menu {
+  position: absolute;
+  z-index: 4;
+  background-color: #131a21;
+  right: 4rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: none;
+}
+
+.task-container .edit-menu.show {
+  display: block;
+}
+
+.task-container .edit-menu li {
+  font-size: 14px;
+  padding: 2px 1rem;
+  margin: 0;
+}
+
+.task-container .edit-menu li:hover {
+  background-color: #fff;
+  color: #131a21;
 }
 
 .task-container .title-task {
