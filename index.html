@@ -9,8 +9,12 @@
 </head>
 <body>
     <div class="background-img">
-        <img src="./assets/img/background/leaves.jpg" />
+        <div class="fadein">
+            <img src="./assets/img/background/leaves.jpg" />
+            <div class="gradient-background" style="opacity:0"></div>
+        </div>
     </div>
+
     <main>
         <section class="card-wrapper">
             <div class="menu-wrap">
@@ -41,21 +45,21 @@
                         </ul>
                     </div>
                     <div class="right-section">
-                        <section data-tab-content id="theme" >
+                        <section class="active" data-tab-content id="theme" >
                             <div class="wrapper-el">
                                 <h2>Select theme</h2>
                                 <div class="theme-container">
-                                    <div class="container-card">
-                                        <img src="/assets/img/thumbnail/tokio1.png" alt="" srcset="">
+                                    <div class="container-card" theme-id-target="1"> 
+                                        <img src="/assets/img/thumbnail/raining-forest.png" alt="" srcset="">
                                     </div>
-                                    <div class="container-card">
+                                    <div class="container-card" theme-id-target="2">
                                         <img src="/assets/img/thumbnail/desert1.jpeg" alt="" srcset="">
                                     </div>
-                                    <div class="container-card">
+                                    <div class="container-card" theme-id-target="3">
                                         <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
                                     </div>   
-                                    <div class="container-card">
-                                        <img src="/assets/img/thumbnail/tokyo2.png" alt="" srcset="">
+                                    <div class="container-card" theme-id-target="4">
+                                        <img src="/assets/img/thumbnail/tokyo3.png" alt="" srcset="">
                                     </div>                                    
                                 </div>
                             </div>
@@ -348,11 +352,11 @@
             accumulatedTime++
             timer.textContent = calculateTime(currentTime)
             tittle.textContent = calculateTime(currentTime)
-            if(currentTime===0 && !isBreak){
+            if(currentTime<=0 && !isBreak){
                 bellSound.play();
                 currentTimerStart = Date.now()+10;
                 setBreak()
-            }else if(currentTime === 0 ){
+            }else if(currentTime <= 0 ){
                 bellSound.play();
                 reset()
                 sessions++
@@ -393,6 +397,9 @@
     }
 
     const calculateTime = value => {
+        if(value < 0)
+            return '00:00'
+
         const sec = parseInt(value, 10); 
         let hours = Math.floor(sec / 3600); 
         let minutes = Math.floor((sec - hours * 3600) / 60); 
@@ -499,6 +506,8 @@
         const circle = document.createElement('span')
         const text = document.createElement('input')
         const checkImg = document.createElement('img')
+        const editBtn = document.createElement('button')
+
 
         newTask.classList.add('task')
         circle.classList.add('select-circle')
@@ -508,6 +517,8 @@
         text.value = task.value;
         text.readOnly = true;
         circle.id = id;
+        editBtn.classList.add('edit-btn')
+        editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
 
         circle.addEventListener('click', (event)=>{
             const task = taskList.find(task => task.id === id)
@@ -518,7 +529,7 @@
             updateCompleteTasks();
         })
 
-        text.addEventListener('click', (event)=>{
+        text.addEventListener('dblclick', (event)=>{
             text.readOnly = false;
             text.focus();
         })
@@ -541,6 +552,7 @@
 
         newTask.appendChild(circle)
         newTask.appendChild(text)
+        newTask.appendChild(editBtn)
         return newTask
     }
 
@@ -670,13 +682,82 @@
         name: 'Song 2',
         url:'https://dl.dropbox.com/s/t4ppqlzsbpb7lkj/chill_4.mp3'
         },]
+    
+        /*
+            Create a theme section to change the theme
+        */
+        let currentTheme = {
+            id: 1,
+            name: 'tokyo 1',
+            url:'https://dl.dropboxusercontent.com/s/6bwwd55lrnp2aab/chill_2.mp3'
+        }
 
+        const consoleStyle = 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)';
+
+        const themeList = document.querySelectorAll('[theme-id-target]')
+
+        const themesData = [
+            {
+                id: 1,
+                name: 'default',
+                url:'/assets/img/background/leaves.jpg',
+                opacity:'0'
+            },
+            {
+                id: 2,
+                name: 'desert 1',
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/c1e9763a84c1e3d78db18d778fc9ce1c/photo-1542401886-65d6c61db217.jpg',
+                opacity:'0.2'
+            },
+            {
+                id: 3,
+                name: 'chill 1',
+                url:'/assets/img/background/chill1.jpg',
+                opacity:'0.2'
+            },
+            {
+                id: 4,
+                name: 'tokyo 3',
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2398x1600/ac12cc53c8a97c19e9b1aaf4dd34a12f/photo-1533050487297-09b450131914.jpg',
+                opacity:'0.5'
+            }]
+
+        const getTheme = (id) => {
+            console.log(id)
+            const theme = themesData.find(theme => theme.id == id)
+            return theme
+        }
+
+        const updateTheme = () => {
+            const backgroundTag = document.querySelector('.background-img')
+            backgroundTag.innerHTML = `
+                <div class="fadein">
+                    <img src="${currentTheme.url}" />
+                    <div class="gradient-background" style="opacity:${currentTheme.opacity}"></div>
+                </div>
+            `
+        }
+
+        themeList.forEach(theme => {
+            theme.addEventListener('click', () => {
+                const id = theme.getAttribute('theme-id-target')
+                currentTheme = getTheme(id)
+                updateTheme()
+                /*themeList.forEach(theme => {
+                    theme.classList.remove('active')
+                })
+                theme.classList.add('active')
+                target.classList.add('active')
+                */
+            })
+        })
+
+        const theme = document.querySelector('#theme')
+        const themeListContainer = document.querySelector('#themeListContainer')
 
 
 
 </script>
 
-
 </body>
 </html>
-
