@@ -125,6 +125,12 @@
                         <li>Timer <span id="pomodoro-config"><img src="assets/img/icons/config.png" alt="" srcset=""></span></li>
                     </ul>
                 </div>
+                <div class="current-task">
+                    <div class="cron-icon">
+                        <img src="/assets/img/icons/timer.png" alt="">
+                    </div>
+                    <h3>Advent of Code - Study everyday </h3>
+                </div>
                 <div class="timer">
                     <div class="time">25:00 </div>
                     <div class="button" id="play">
@@ -137,6 +143,7 @@
                 <div class="clock">
                     <div class="time"> <span class="time-stamp"></span> <span class="meridian"></span></div>
                 </div>
+
             </div>
             <div class="task-container col-5">
                 <div class="tab-section">
@@ -519,8 +526,9 @@
         circle.id = id;
         editBtn.classList.add('edit-btn')
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
+        editMenu.setAttribute('data-id',id)
         editMenu.classList.add('edit-menu')
-        editMenu.innerHTML = `<ul><li>Edit</li><li>Delete</li></ul>`
+        editMenu.innerHTML = `<ul><li>Asign ⏱ </li><li>Edit</li><li>Delete</li></ul>`
 
 
         circle.addEventListener('click', (event)=>{
@@ -531,15 +539,18 @@
             console.log(taskList)
             updateCompleteTasks();
         })
-
-        editBtn.addEventListener('click', (event)=>{
-            editMenu.classList.toggle('show')
-        })
         
         document.addEventListener('click', (event)=>{
             if(!event.target.closest('.edit-btn')){
                 editMenu.classList.remove('show')
             }
+        })
+
+        editBtn.addEventListener('click', (event)=>{
+            document.querySelectorAll('.edit-menu').forEach(menu => {
+                menu.classList.remove('show')
+            })
+            editMenu.classList.toggle('show')
         })
 
         text.addEventListener('dblclick', (event)=>{
@@ -556,7 +567,6 @@
         text.addEventListener('blur', (event)=>{
             text.readOnly = true;
             if(text.value.trim() === ''){
-                //return task con id = text.id
                 const task = taskList.find(task => task.id === id)
                 text.value = task.value;
             }
@@ -674,7 +684,8 @@
     
     new Sortable(el, {
         animation: 150,
-        ghostClass: 'blue-background-class'
+        ghostClass: 'highlight',
+        //swapClass: 'highlight'
     }); 
 
 

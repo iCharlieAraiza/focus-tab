@@ -426,9 +426,12 @@ main {
 .task-container .todo-container li:active {
   cursor: -webkit-grabbing;
   cursor: grabbing;
-  background-color: rgba(255, 255, 255, 0.31);
   -webkit-transition: 0.6s ease-in-out;
   transition: 0.6s ease-in-out;
+}
+
+.task-container .todo-container li:hover {
+  background-color: #ffffff0e;
 }
 
 .task-container .select-circle {
@@ -679,6 +682,37 @@ main {
   width: 38px;
 }
 
+.current-task {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 600px;
+  margin-bottom: -16px;
+  margin-top: 14px;
+}
+
+.current-task h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.current-task .cron-icon {
+  margin-right: 0.5rem;
+  -ms-flex-item-align: baseline;
+      align-self: baseline;
+  padding-top: 4px;
+}
+
+.current-task img {
+  width: 1.5rem;
+}
+
 .modal {
   display: none;
   background-color: #0000009d;
@@ -807,6 +841,10 @@ main {
 
 #pomodoro-config img {
   width: 20px;
+}
+
+.highlight {
+  background-color: #fafafa34 !important;
 }
 
 @keyframes fadeIn {
