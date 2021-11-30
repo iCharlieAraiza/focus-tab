@@ -60,7 +60,10 @@
                                     </div>   
                                     <div class="container-card" theme-id-target="4">
                                         <img src="/assets/img/thumbnail/tokyo3.png" alt="" srcset="">
-                                    </div>                                    
+                                    </div>
+                                    <div class="container-card" theme-id-target="5">
+                                        <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
+                                    </div>                                        
                                 </div>
                             </div>
                         </section>
@@ -314,6 +317,16 @@
         menu.classList.toggle('active')
     }
 
+    document.addEventListener('click', (event)=>{
+        if(event.target.closest('#menuBtn') || event.target.closest('.menu')){
+            console.log('menu')
+            //menu.classList.remove('active')
+        }
+
+        if(!event.target.closest('#menuBtn') && !event.target.closest('.menu')){
+            menu.classList.remove('active')
+        } 
+    })
 
 
     const timer = document.querySelector('.timer .time')
@@ -505,6 +518,8 @@
     const listContainer = document.querySelector('#listContainer')
     const totalTasks = document.querySelector('#totalTasks')
     const completedTasks = document.querySelector('#completedTasks')
+    const currentTaskElement = document.querySelector('.current-task h3') 
+    let currentTask = {};
 
     const createTask = (task)=>{
         const id = task.id;
@@ -528,7 +543,7 @@
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
         editMenu.setAttribute('data-id',id)
         editMenu.classList.add('edit-menu')
-        editMenu.innerHTML = `<ul><li>Asign ⏱ </li><li>Edit</li><li>Delete</li></ul>`
+        editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li>Edit</li><li>Delete</li></ul>`
 
 
         circle.addEventListener('click', (event)=>{
@@ -561,6 +576,7 @@
         text.addEventListener('keyup', (event)=>{
             if(event.keyCode === 13){
                 text.readOnly = true;
+                updateTask({id,value:text.value})
             }
         })
 
@@ -577,6 +593,21 @@
         newTask.appendChild(editBtn)
         newTask.appendChild(editMenu)
         return newTask
+    }
+
+    const setCurrentTask = (id)=>{       
+        const task = taskList.find(task => task.id == id)
+        console.log(task)
+        currentTaskElement.textContent = task.value    
+    }
+
+    const updateTask = (taskUpdated)=>{
+        taskList.forEach(task => {
+            if(task.id === taskUpdated.id){
+                task.value = taskUpdated.value
+            }
+        })
+        console.log(taskList)
     }
 
     //Change the task status
@@ -649,7 +680,7 @@
         completedTasks.textContent = pending
     }
 
-    taskList = [{id:1, status:false, value:'Task 1'},{status:false, id:2, value:'Task 2'}]
+    taskList = [{id:1, status:false, value:'Advent of Code - Study everyday'},{status:false, id:2, value:'Task 2'}]
     
     renderList()
     updateTotalTasks()
@@ -742,7 +773,16 @@
                 name: 'tokyo 3',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2398x1600/ac12cc53c8a97c19e9b1aaf4dd34a12f/photo-1533050487297-09b450131914.jpg',
                 opacity:'0.5'
-            }]
+            },{
+                id: 5,
+                name: 'chill 2 video',
+                is_video: true,
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2398x1600/ac12cc53c8a97c19e9b1aaf4dd34a12f/photo-1533050487297-09b450131914.jpg',
+                video_url:'https://dl.dropboxusercontent.com/s/wsbznpjk1xwys2n/mylivewallpapers.com-FIXED-Living-Room-Chill%20%282%29.mp4',
+                opacity:'0.5'
+            }
+            
+        ]
 
         const getTheme = (id) => {
             console.log(id)
@@ -758,6 +798,15 @@
                     <div class="gradient-background" style="opacity:${currentTheme.opacity}"></div>
                 </div>
             `
+            if(currentTheme.is_video){
+                const videoTag = document.querySelector('.background-img')
+                videoTag.innerHTML = `
+                    <video autoplay muted loop>
+                        <source src="${currentTheme.video_url}" type="video/mp4">
+                    </video>
+                `
+            }
+
         }
 
         themeList.forEach(theme => {
