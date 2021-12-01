@@ -777,7 +777,7 @@
                 id: 5,
                 name: 'chill 2 video',
                 is_video: true,
-                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2398x1600/ac12cc53c8a97c19e9b1aaf4dd34a12f/photo-1533050487297-09b450131914.jpg',
+                url:'/assets/img/background/chill1.jpg',
                 video_url:'https://dl.dropboxusercontent.com/s/wsbznpjk1xwys2n/mylivewallpapers.com-FIXED-Living-Room-Chill%20%282%29.mp4',
                 opacity:'0.5'
             }
@@ -801,9 +801,12 @@
             if(currentTheme.is_video){
                 const videoTag = document.querySelector('.background-img')
                 videoTag.innerHTML = `
-                    <video autoplay muted loop>
+                <div class="fadein">
+                    <video poster="${currentTheme.url}" autoplay muted loop>
                         <source src="${currentTheme.video_url}" type="video/mp4">
                     </video>
+                    <div class="gradient-background" style="opacity:${currentTheme.opacity}"></div>
+                </div>
                 `
             }
 
