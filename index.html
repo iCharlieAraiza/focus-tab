@@ -48,6 +48,7 @@
                         <section class="active" data-tab-content id="theme" >
                             <div class="wrapper-el">
                                 <h2>Select theme</h2>
+                                <h4>Static wallpapers</h2>
                                 <div class="theme-container">
                                     <div class="container-card" theme-id-target="1"> 
                                         <img src="/assets/img/thumbnail/raining-forest.png" alt="" srcset="">
@@ -56,15 +57,28 @@
                                         <img src="/assets/img/thumbnail/desert1.jpeg" alt="" srcset="">
                                     </div>
                                     <div class="container-card" theme-id-target="3">
-                                        <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
+                                        <img src="/assets/img/thumbnail/london-underground.png" alt="" srcset="">
                                     </div>   
                                     <div class="container-card" theme-id-target="4">
                                         <img src="/assets/img/thumbnail/tokyo3.png" alt="" srcset="">
-                                    </div>
+                                    </div>            
                                     <div class="container-card" theme-id-target="5">
-                                        <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
-                                    </div>                                        
+                                        <img src="https://images.unsplash.com/photo-1638201977889-7cf4026c7960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDZ8MzE3MDk5fHx8fHwyfHwxNjM4NTc2ODE2&ixlib=rb-1.2.1&q=80&w=200" alt="" srcset="">
+                                    </div> 
+                                    <div class="container-card" theme-id-target="6">
+                                        <img src="https://images.unsplash.com/photo-1632301497603-33fb3d7afdd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDE3N3wzMTcwOTl8fHx8fDJ8fDE2Mzg1NzY5OTY&ixlib=rb-1.2.1&q=80&w=200" alt="" srcset="">
+                                    </div>                               
                                 </div>
+                                <h4>Live wallpapers</h2>
+                                <div class="theme-container">
+                                    <div class="container-card" theme-id-target="7">
+                                        <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
+                                    </div>
+                                    <div class="container-card" theme-id-target="8">
+                                        <img src="/assets/img/thumbnail/coffeetokyo.png" alt="" srcset="">
+                                    </div>   
+                                </div>
+
                             </div>
                         </section>
                         <section  data-tab-content id="sounds">
@@ -137,7 +151,7 @@
                 <div class="timer">
                     <div class="time">25:00 </div>
                     <div class="button" id="play">
-                        <img src="/assets/img/icons/play-button.png" alt="" srcset="">
+                        <img id="play-button" src="/assets/img/icons/play-button.png" alt="" srcset="">
                     </div>
                     <div class="button" id="stop">
                         <img src="/assets/img/icons/stop-button.png" alt="" srcset="">
@@ -336,16 +350,21 @@
 
     const tittle = document.querySelector('title')
 
+    const playBtnIcon = document.getElementById('play-button')
+
     let startTime = 0
     let currentTime = 0
 
     play.onclick = ()=>{
         pressSound.play();
         active = !active
-        if(active)
+        if(active){
             start();
-        else
+            playBtnIcon.src = '/assets/img/icons/pause.png'
+        } else{
             pause();
+            playBtnIcon.src = '/assets/img/icons/play-button.png'
+        }
     }
 
     stop.onclick = ()=>{
@@ -764,9 +783,9 @@
             },
             {
                 id: 3,
-                name: 'chill 1',
-                url:'/assets/img/background/chill1.jpg',
-                opacity:'0.2'
+                name: 'london 1',
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f00809642b4ab890c4430e5426537102/photo-1515165562839-978bbcf18277.jpg',
+                opacity:'0.4'
             },
             {
                 id: 4,
@@ -775,11 +794,28 @@
                 opacity:'0.5'
             },{
                 id: 5,
+                name: 'landscape 1',
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/922974355e4e4d8b3864ecd8a23933c9/photo-1638201977889-7cf4026c7960.jpg',
+                opacity:'0.2'
+            },{
+                id: 6,
+                name: 'landscape 2',
+                url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f79950183efa74e5ee05eafe2037a848/photo-1632301497603-33fb3d7afdd1.jpg',
+                opacity:'0.2'
+            },{
+                id: 7,
                 name: 'chill 2 video',
                 is_video: true,
                 url:'/assets/img/background/chill1.jpg',
                 video_url:'https://dl.dropboxusercontent.com/s/wsbznpjk1xwys2n/mylivewallpapers.com-FIXED-Living-Room-Chill%20%282%29.mp4',
-                opacity:'0.5'
+                opacity:'0.2'
+            },{
+                id: 8,
+                name: 'chill 3 video',
+                is_video: true,
+                url:'/assets/img/background/coffeetokyo.jpg',
+                video_url:'https://dl.dropboxusercontent.com/s/ecjsk0pfte53s12/962994658915e2815dfba53a62c6b9bc.mp4',
+                opacity:'0.3'
             }
             
         ]
