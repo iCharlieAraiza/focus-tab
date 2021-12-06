@@ -6,4 +6,4 @@
 ## Features (V 0.2 alpha) 
 - Pomodoro Timer (includes custom settings)  
 - To-do list -Widgets
-- Dynamic background
+- Live background
