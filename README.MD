@@ -7,3 +7,4 @@
 - Pomodoro Timer (includes custom settings)  
 - To-do list -Widgets
 - Live background
+-update readme
