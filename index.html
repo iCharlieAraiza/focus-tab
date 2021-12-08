@@ -49,28 +49,10 @@
                             <div class="wrapper-el">
                                 <h2>Select theme</h2>
                                 <h4>Static wallpapers</h2>
-                                <div class="theme-container">
-                                    <div class="container-card" theme-id-target="1"> 
-                                        <img src="/assets/img/thumbnail/raining-forest.png" alt="" srcset="">
-                                    </div>
-                                    <div class="container-card" theme-id-target="2">
-                                        <img src="/assets/img/thumbnail/desert1.jpeg" alt="" srcset="">
-                                    </div>
-                                    <div class="container-card" theme-id-target="3">
-                                        <img src="/assets/img/thumbnail/london-underground.png" alt="" srcset="">
-                                    </div>   
-                                    <div class="container-card" theme-id-target="4">
-                                        <img src="/assets/img/thumbnail/tokyo3.png" alt="" srcset="">
-                                    </div>            
-                                    <div class="container-card" theme-id-target="5">
-                                        <img src="https://images.unsplash.com/photo-1638201977889-7cf4026c7960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDZ8MzE3MDk5fHx8fHwyfHwxNjM4NTc2ODE2&ixlib=rb-1.2.1&q=80&w=200" alt="" srcset="">
-                                    </div> 
-                                    <div class="container-card" theme-id-target="6">
-                                        <img src="https://images.unsplash.com/photo-1632301497603-33fb3d7afdd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDE3N3wzMTcwOTl8fHx8fDJ8fDE2Mzg1NzY5OTY&ixlib=rb-1.2.1&q=80&w=200" alt="" srcset="">
-                                    </div>                               
+                                <div id="staticContainer" class="theme-container">                            
                                 </div>
                                 <h4>Live wallpapers</h2>
-                                <div class="theme-container">
+                                <div id="liveContainer" class="theme-container">
                                     <div class="container-card" theme-id-target="7">
                                         <img src="/assets/img/thumbnail/chill1.png" alt="" srcset="">
                                     </div>
@@ -84,7 +66,6 @@
                                         <img src="/assets/img/thumbnail/chillgirl.png" alt="" srcset="">
                                     </div>  
                                 </div>
-
                             </div>
                         </section>
                         <section  data-tab-content id="sounds">
@@ -772,46 +753,51 @@
 
         const consoleStyle = 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)';
 
-        const themeList = document.querySelectorAll('[theme-id-target]')
-
         const themesData = [
             {
                 id: 1,
                 name: 'default',
                 url:'/assets/img/background/leaves.jpg',
+                thumbnail:'/assets/img/thumbnail/raining-forest.png"',
                 opacity:'0'
             },
             {
                 id: 2,
                 name: 'desert 1',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/c1e9763a84c1e3d78db18d778fc9ce1c/photo-1542401886-65d6c61db217.jpg',
+                thumbnail:'/assets/img/thumbnail/desert1.jpeg',
                 opacity:'0.2'
             },
             {
                 id: 3,
                 name: 'london 1',
+                thumbnail:'/assets/img/thumbnail/london-underground.png',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f00809642b4ab890c4430e5426537102/photo-1515165562839-978bbcf18277.jpg',
                 opacity:'0.4'
             },
             {
                 id: 4,
                 name: 'tokyo 3',
+                thumbnail:'/assets/img/thumbnail/tokyo3.png',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2398x1600/ac12cc53c8a97c19e9b1aaf4dd34a12f/photo-1533050487297-09b450131914.jpg',
                 opacity:'0.5'
             },{
                 id: 5,
                 name: 'landscape 1',
+                thumbnail:'https://images.unsplash.com/photo-1638201977889-7cf4026c7960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDZ8MzE3MDk5fHx8fHwyfHwxNjM4NTc2ODE2&ixlib=rb-1.2.1&q=80&w=200',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/922974355e4e4d8b3864ecd8a23933c9/photo-1638201977889-7cf4026c7960.jpg',
                 opacity:'0.2'
             },{
                 id: 6,
                 name: 'landscape 2',
+                thumbnail:'https://images.unsplash.com/photo-1632301497603-33fb3d7afdd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDE3N3wzMTcwOTl8fHx8fDJ8fDE2Mzg1NzY5OTY&ixlib=rb-1.2.1&q=80&w=200',
                 url:'https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/f79950183efa74e5ee05eafe2037a848/photo-1632301497603-33fb3d7afdd1.jpg',
                 opacity:'0.2'
             },{
                 id: 7,
                 name: 'chill 2 video',
                 is_video: true,
+                thumbnail:'/assets/img/thumbnail/chill1.png',
                 url:'/assets/img/background/chill1.jpg',
                 video_url:'https://dl.dropboxusercontent.com/s/wsbznpjk1xwys2n/mylivewallpapers.com-FIXED-Living-Room-Chill%20%282%29.mp4',
                 opacity:'0.2'
@@ -819,6 +805,7 @@
                 id: 8,
                 name: 'chill 3 video',
                 is_video: true,
+                thumbnail:'/assets/img/thumbnail/coffeetokyo.png',
                 url:'/assets/img/background/coffeetokyo.jpg',
                 video_url:'https://dl.dropboxusercontent.com/s/ecjsk0pfte53s12/962994658915e2815dfba53a62c6b9bc.mp4',
                 opacity:'0.3'
@@ -826,7 +813,8 @@
                 id: 9,
                 name: 'chill cafe video',
                 is_video: true,
-                url:'/assets/img/background/chillcafe1.jpg',
+                thumbnail:'/assets/img/thumbnail/chillcafe1.png',
+                url:'/assets/img/background/chillcafe1.png',
                 video_url:'https://dl.dropboxusercontent.com/s/20187f7jplg5tur/coffee%20christmas%20chill.mp4',
                 opacity:'0.3'
             },{
@@ -834,11 +822,31 @@
                 name: 'chill study video',
                 is_video: true,
                 url:'/assets/img/background/chillgirl.jpeg',
+                thumbnail:'/assets/img/thumbnail/chillgirl.png',
                 video_url:'https://dl.dropboxusercontent.com/s/nvmvycvr0dd7ad6/study%20chill.mp4',
                 opacity:'0.3'
             }
             
         ]
+
+        const staticContainer = document.querySelector('#staticContainer')
+        const liveContainer = document.querySelector('#liveContainer')
+
+
+        const staticWallpapers = themesData.filter(theme => theme.is_video != true)
+        const liveWallpapers = themesData.filter(theme => theme.is_video == true)
+
+        staticContainer.innerHTML = staticWallpapers.map(theme => `
+        <div class="container-card" theme-id-target="${theme.id}"> 
+            <img src="${theme.thumbnail}" alt="" srcset="">
+        </div>`).join('')
+
+        liveContainer.innerHTML = liveWallpapers.map(theme => `
+        <div class="container-card" theme-id-target="${theme.id}"> 
+            <img src="${theme.thumbnail}" alt="" srcset="">
+        </div>`).join('')
+
+        const themeList = document.querySelectorAll('[theme-id-target]')
 
         const getTheme = (id) => {
             console.log(id)
@@ -867,6 +875,8 @@
             }
 
         }
+
+        console.log(liveWallpapers)
 
         themeList.forEach(theme => {
             theme.addEventListener('click', () => {
