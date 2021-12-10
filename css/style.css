@@ -217,17 +217,17 @@ main {
           backdrop-filter: blur(2px);
 }
 
-.card-wrapper .menu-wrap .menu ul {
+.card-wrapper .menu-wrap .menu .menu-list {
   list-style: none;
   padding: 0;
 }
 
-.card-wrapper .menu-wrap .menu ul li {
+.card-wrapper .menu-wrap .menu .menu-list li {
   text-align: left;
   margin: 1rem 0;
 }
 
-.card-wrapper .menu-wrap .menu ul .menu-item {
+.card-wrapper .menu-wrap .menu .menu-list .menu-item {
   color: #fff;
   text-decoration: none;
   cursor: pointer;
@@ -239,12 +239,32 @@ main {
           align-items: center;
 }
 
-.card-wrapper .menu-wrap .menu ul .iconMenu {
+.card-wrapper .menu-wrap .menu .menu-list .iconMenu {
   margin-right: 10px;
 }
 
-.card-wrapper .menu-wrap .menu ul .iconMenu img {
+.card-wrapper .menu-wrap .menu .menu-list .iconMenu img {
   width: 28px;
+}
+
+.card-wrapper .menu-wrap .menu .tag-selector-section ul {
+  margin: 0;
+  list-style: none;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow-x: auto;
+  padding: 0;
+  padding-bottom: 1rem;
+}
+
+.card-wrapper .menu-wrap .menu .tag-selector-section ul li {
+  margin: 0 5px;
+  padding: 3px 1.5rem;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  font-size: 14px;
 }
 
 .card-wrapper .menu-wrap .menu .left-section {
