@@ -165,9 +165,44 @@ main{
                         border: 1px solid #fff;
                         border-radius: 15px;
                         font-size: 14px;
+                        cursor: pointer;
+                        &:hover{
+                            background-color: #fff;
+                            color: #131a21;
+                        }
                     }
                 }
             }
+
+            .sound-container{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                grid-gap: 6px 4px;
+                .sound-btn{
+                    border: 1px solid #fff;
+                    border-radius: 5px;    
+                    height: 5rem;
+                    position: relative;
+                }
+                .title,.sound-control{
+                    font-size: 14px;
+                    position: absolute;
+                    bottom: 0;
+                    text-align: center;
+                    width: 100%;
+                    padding-bottom: 5px;
+                }
+                .sound-control{
+                    display: block;
+                    box-sizing: border-box;
+                    margin: 0;
+                    input{
+                        margin: 0;
+                        width: 92%;
+                    }
+                }
+            }
+
             .left-section{
                 width: 30%;
             }
