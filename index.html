@@ -943,6 +943,70 @@
         const themeListContainer = document.querySelector('#themeListContainer')
 
 
+        /*
+            Ambient sounds
+        */
+
+        const ambientSounds = [
+            {
+                id: 1,
+                name: 'fireplace',
+                img: '/assets/img/ambient-icons/fireplace.png',
+                url: '/assets/audio/fireplace.mp3'
+            },{
+                id: 2,
+                name: 'rainy',
+                img: '/assets/img/ambient-icons/rainy.png',
+                url: '/assets/audio/rain.mp3'
+            },{
+                id: 3,
+                name: 'wind',
+                img: '/assets/img/ambient-icons/wind.png',
+                url: '/assets/audio/wind.mp3'
+            },{
+                id: 4,
+                name: 'sea',
+                img: '/assets/img/ambient-icons/sea.png',
+                url: '/assets/audio/sea.mp3'
+            },{
+                id: 5,
+                name: 'traffic',
+                img: '/assets/img/ambient-icons/traffic.png',
+                url: '/assets/audio/traffic.mp3'
+            },{
+                id: 6,
+                name: 'night',
+                img: '/assets/img/ambient-icons/night.png',
+                url: '/assets/audio/night.mp3'
+            },{
+                id: 7,
+                name: 'leaves',
+                img: '/assets/img/ambient-icons/leaves.png',
+                url: '/assets/audio/leaves.mp3'
+            },{
+                id: 8,
+                name: 'birds',
+                img: '/assets/img/ambient-icons/bird.png',
+                url: '/assets/audio/birds.mp3'
+            },
+        ]
+
+        const soundContainer = document.querySelector('.sound-container')
+
+        
+        ambientSounds.forEach(sound => {
+            soundContainer.innerHTML += `
+                <div class="sound-btn">
+                    <div class="img">
+                        <img src="${sound.img}" alt="">
+                    </div>
+                    <div class="title">
+                        ${sound.name}
+                    </div>
+                </div>
+                `
+        })
+
 
 </script>
 

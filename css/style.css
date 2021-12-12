@@ -282,10 +282,27 @@ main {
 }
 
 .card-wrapper .menu-wrap .menu .sound-container .sound-btn {
-  border: 1px solid #fff;
+  border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 5px;
   height: 5rem;
   position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-wrapper .menu-wrap .menu .sound-container .sound-btn:hover {
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-image: inherit;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, rgba(255, 255, 255, 0.4))) content-box, -webkit-gradient(linear, right top, left top, from(#743ad5), to(#d53a9d)) border-box;
+  background: linear-gradient(rgba(255, 255, 255, 0.4) 0 0 0) content-box, linear-gradient(to left, #743ad5, #d53a9d) border-box;
+  border-width: 2px;
+}
+
+.card-wrapper .menu-wrap .menu .sound-container img {
+  width: 50%;
+  display: block;
+  margin: 10px auto;
 }
 
 .card-wrapper .menu-wrap .menu .sound-container .title, .card-wrapper .menu-wrap .menu .sound-container .sound-control {
