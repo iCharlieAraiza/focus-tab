@@ -192,6 +192,14 @@ main{
                         background: linear-gradient(rgba(255, 255, 255, 0.4) 0 0 0) content-box, linear-gradient(to left, #743ad5, #d53a9d) border-box;
                         border-width: 2px;                        
                     }
+                    &.active{
+                        .sound-control{
+                            display: block!important;
+                        }
+                        .title{
+                            display: none;
+                        }
+                    }
                 }
                 img{
                     width: 50%;
@@ -207,7 +215,7 @@ main{
                     padding-bottom: 5px;
                 }
                 .sound-control{
-                    display: block;
+                    display: none;
                     box-sizing: border-box;
                     margin: 0;
                     input{

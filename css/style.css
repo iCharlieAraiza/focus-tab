@@ -299,6 +299,14 @@ main {
   border-width: 2px;
 }
 
+.card-wrapper .menu-wrap .menu .sound-container .sound-btn.active .sound-control {
+  display: block !important;
+}
+
+.card-wrapper .menu-wrap .menu .sound-container .sound-btn.active .title {
+  display: none;
+}
+
 .card-wrapper .menu-wrap .menu .sound-container img {
   width: 50%;
   display: block;
@@ -315,7 +323,7 @@ main {
 }
 
 .card-wrapper .menu-wrap .menu .sound-container .sound-control {
-  display: block;
+  display: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;

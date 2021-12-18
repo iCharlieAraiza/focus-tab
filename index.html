@@ -952,12 +952,12 @@
                 id: 1,
                 name: 'fireplace',
                 img: '/assets/img/ambient-icons/fireplace.png',
-                url: '/assets/audio/fireplace.mp3'
+                url: 'https://dl.dropbox.com/s/tl2uhg2vx4zxbzj/fireplace.mp3'
             },{
                 id: 2,
                 name: 'rainy',
                 img: '/assets/img/ambient-icons/rainy.png',
-                url: '/assets/audio/rain.mp3'
+                url: 'https://dl.dropbox.com/s/cteq8rxsfk031mq/rain_forest.mp3'
             },{
                 id: 3,
                 name: 'wind',
@@ -993,18 +993,45 @@
 
         const soundContainer = document.querySelector('.sound-container')
 
+
+        const playSound = (url) => {
+            const audio = new Audio(url)
+            audio.play()
+            console.log("check")
+        }
         
         ambientSounds.forEach(sound => {
-            soundContainer.innerHTML += `
-                <div class="sound-btn">
-                    <div class="img">
-                        <img src="${sound.img}" alt="">
-                    </div>
-                    <div class="title">
-                        ${sound.name}
-                    </div>
+            const soundBtn = document.createElement('div')
+            soundBtn.classList.add('sound-btn')
+            soundBtn.innerHTML = `
+                <img src="${sound.img}" alt="">
+                <div class="title">
+                    ${sound.name} a
                 </div>
-                `
+                <div class="sound-control">
+                    <input type=range min=0 max=100 value=40 id="fader" step=1>
+                </div>
+            `
+            const audio = new Audio(sound.url)
+
+            soundBtn.addEventListener('click', (event) => {
+                console.log(event.target.id)
+                if(event.target.id!=='fader'){
+                    soundBtn.classList.toggle('active')
+                    if(soundBtn.classList.contains('active')){
+                        audio.play()
+                        audio.loop = true
+                        audio.volume = document.querySelector('#fader').value / 100
+                    }else{
+                        audio.pause()
+                    }
+                }else{
+                    audio.volume = 0
+                }
+            })
+
+            soundContainer.appendChild(soundBtn)
+
         })
 
 
