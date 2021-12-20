@@ -7,4 +7,9 @@
 - Pomodoro Timer (includes custom settings)  
 - To-do list -Widgets
 - Live background
--update readme
+
+## Todo
+- [ ] Complete ambient audio feature
+- [ ] Finish CRUD Task
+- [ ] Add local storage option
+- [ ] Refactore code
