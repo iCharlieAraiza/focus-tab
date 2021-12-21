@@ -9,7 +9,7 @@
 - Live background
 
 ## Todo
-- [ ] Complete ambient audio feature
+- [x] Complete ambient audio feature
 - [ ] Finish CRUD Task
 - [ ] Add local storage option
 - [ ] Refactore code

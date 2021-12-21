@@ -550,7 +550,7 @@
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
         editMenu.setAttribute('data-id',id)
         editMenu.classList.add('edit-menu')
-        editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li>Edit</li><li>Delete</li></ul>`
+        editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li>Edit</li><li onclick="deleteCurrentTask(${id})">Delete</li></ul>`
 
 
         circle.addEventListener('click', (event)=>{
@@ -608,6 +608,14 @@
         currentTaskElement.textContent = task.value    
     }
 
+    const deleteCurrentTask = (id)=>{
+        const task = taskList.find(task => task.id == id)
+        taskList = taskList.filter(task => task.id != id)
+        console.log(taskList)
+        //listContainer.removeChild(task.element)
+        renderList()
+    }
+
     const updateTask = (taskUpdated)=>{
         taskList.forEach(task => {
             if(task.id === taskUpdated.id){
@@ -654,7 +662,9 @@
 
     // Create a method to render the list
     const renderList = ()=>{
+        //const taskList = document.querySelectorAll('.taskList')
         taskList.innerHTML = ''
+        listContainer.innerHTML = ''
         taskList.forEach(taskValue=>{
             const task = createTask(taskValue);
             listContainer.appendChild(task)
@@ -965,7 +975,7 @@
                     ${sound.name}
                 </div>
                 <div class="sound-control">
-                    <input type=range min=0 value="${defaultVolume*100}" max=100 class="range-fader" id="fader" step=1>
+                    <input sound-id="${sound.id}" type=range min=0 value="${defaultVolume*100}" max=100 class="range-fader" id="fader" step=1>
                 </div>
             `
             const audio = new Audio(sound.url)
@@ -987,9 +997,12 @@
                     //audio.volume = document.querySelector('#fader').value / 100
                 }
                 document.querySelectorAll('.range-fader').forEach(fader => {
+    
                     fader.addEventListener('input', () => {
-                        audio.volume= fader.value/100
-                        console.log(fader.value)
+                        if(sound.id == fader.getAttribute('sound-id')){
+                            audio.volume= fader.value/100
+                            console.log(fader.value)
+                        }
                     })
                 })
             })
