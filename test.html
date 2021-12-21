@@ -10,5 +10,17 @@
     <button id="start">Start</button>
     <button id="stop">Stop</button>
     <script src="/js/timer.js"></script>
+
+    <div class="range">
+        
+    </div>
+
 </body>
+<script>
+    const range = document.querySelector('.range');
+    range.innerHTML = `
+        <input id="rangeElement" type="range" min="0" max="100" value="0" step="1" id="range">    
+    `;
+    console.log(range);
+</script>
 </html>

@@ -189,7 +189,7 @@ main{
                         border-radius: 5px;  
                         border: 2px solid transparent;
                         background-image:inherit;
-                        background: linear-gradient(rgba(255, 255, 255, 0.4) 0 0 0) content-box, linear-gradient(to left, #743ad5, #d53a9d) border-box;
+                        background: linear-gradient(rgba(0, 0, 0, 0.78) 0 0 0) content-box, linear-gradient(to left, #743ad5, #d53a9d) border-box;
                         border-width: 2px;                        
                     }
                     &.active{

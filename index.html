@@ -70,54 +70,8 @@
                                     </ul>
                                 </div>
                                 <div class="sound-container">
-                                    
-                                    <div class="sound-btn">
-                                        <div class="img">
-                                            <img src="/assets/img/icons/sound.png" alt="">
-                                        </div>
-                                        <div class="title">
-                                            Rain
-                                        </div>
-                                    </div>
-
-                                    <div class="sound-btn">
-                                        <div class="img">
-                                            <img src="/assets/img/icons/sound.png" alt="">
-                                        </div>
-                                        <div class="title">
-                                            Birds
-                                        </div>
-                                    </div>
-
-                                    <div class="sound-btn">
-                                        <div class="img">
-                                            <img src="/assets/img/icons/sound.png" alt="">
-                                        </div>
-                                        <div class="title">
-                                            Forest
-                                        </div>
-                                    </div>
-
-                                    <div class="sound-btn">
-                                        <div class="img">
-                                            <img src="/assets/img/icons/sound.png" alt="">
-                                        </div>
-                                        <div class="sound-control">
-                                            <input type=range min=0 max=100 value=40 id=fader step=1>
-                                        </div>
-                                    </div>
-
-                                    <div class="sound-btn">
-                                        <div class="img">
-                                            <img src="/assets/img/icons/sound.png" alt="">
-                                        </div>
-                                        <div class="title">
-                                            Forest
-                                        </div>
-                                    </div>
 
                                 </div>
-
                             </div>
                         </section>
                     </div>
@@ -962,32 +916,32 @@
                 id: 3,
                 name: 'wind',
                 img: '/assets/img/ambient-icons/wind.png',
-                url: '/assets/audio/wind.mp3'
+                url: 'https://dl.dropbox.com/s/9f1nb1ex2oqdwxd/wind.mp3'
             },{
                 id: 4,
-                name: 'sea',
-                img: '/assets/img/ambient-icons/sea.png',
-                url: '/assets/audio/sea.mp3'
+                name: 'ocean',
+                img: '/assets/img/ambient-icons/wave.png',
+                url: 'https://dl.dropbox.com/s/1rev2zsphf5mo3r/ocean.mp3'
             },{
                 id: 5,
                 name: 'traffic',
-                img: '/assets/img/ambient-icons/traffic.png',
-                url: '/assets/audio/traffic.mp3'
+                img: '/assets/img/ambient-icons/car.png',
+                url: 'https://dl.dropbox.com/s/wrs6oxtdtg87w8p/city_traffic.mp3'
             },{
                 id: 6,
                 name: 'night',
-                img: '/assets/img/ambient-icons/night.png',
-                url: '/assets/audio/night.mp3'
+                img: '/assets/img/ambient-icons/moon.png',
+                url: 'https://dl.dropbox.com/s/tvhudzjcuxz60a6/Night-sound-effect.mp3'
             },{
                 id: 7,
                 name: 'leaves',
                 img: '/assets/img/ambient-icons/leaves.png',
-                url: '/assets/audio/leaves.mp3'
+                url: 'https://dl.dropbox.com/s/ryaju9hmx36awl7/leaves.mp3'
             },{
                 id: 8,
                 name: 'birds',
                 img: '/assets/img/ambient-icons/bird.png',
-                url: '/assets/audio/birds.mp3'
+                url: 'https://dl.dropbox.com/s/64binnplyn6n2x6/Bird-singing-early-in-the-morning.mp3'
             },
         ]
 
@@ -1002,17 +956,20 @@
         
         ambientSounds.forEach(sound => {
             const soundBtn = document.createElement('div')
+            const defaultVolume = 0.5;
+
             soundBtn.classList.add('sound-btn')
             soundBtn.innerHTML = `
                 <img src="${sound.img}" alt="">
                 <div class="title">
-                    ${sound.name} a
+                    ${sound.name}
                 </div>
                 <div class="sound-control">
-                    <input type=range min=0 max=100 value=40 id="fader" step=1>
+                    <input type=range min=0 value="${defaultVolume*100}" max=100 class="range-fader" id="fader" step=1>
                 </div>
             `
             const audio = new Audio(sound.url)
+
 
             soundBtn.addEventListener('click', (event) => {
                 console.log(event.target.id)
@@ -1021,13 +978,20 @@
                     if(soundBtn.classList.contains('active')){
                         audio.play()
                         audio.loop = true
-                        audio.volume = document.querySelector('#fader').value / 100
+                        audio.volume = defaultVolume
                     }else{
                         audio.pause()
                     }
                 }else{
-                    audio.volume = 0
+                    console.log(document.querySelector('#fader').value)
+                    //audio.volume = document.querySelector('#fader').value / 100
                 }
+                document.querySelectorAll('.range-fader').forEach(fader => {
+                    fader.addEventListener('input', () => {
+                        audio.volume= fader.value/100
+                        console.log(fader.value)
+                    })
+                })
             })
 
             soundContainer.appendChild(soundBtn)
