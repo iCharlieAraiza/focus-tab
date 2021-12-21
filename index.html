@@ -522,8 +522,8 @@
     let taskList = [{}];
 
     const taskform = document.querySelector('#taskform')
-    const listContainer = document.querySelector('#listContainer')
     const totalTasks = document.querySelector('#totalTasks')
+    const listContainer = document.querySelector('#listContainer')
     const completedTasks = document.querySelector('#completedTasks')
     const currentTaskElement = document.querySelector('.current-task h3') 
     let currentTask = {};
@@ -532,11 +532,11 @@
         const id = task.id;
         
         const newTask = document.createElement('li')
-        const circle = document.createElement('span')
         const text = document.createElement('input')
+        const circle = document.createElement('span')
         const checkImg = document.createElement('img')
-        const editBtn = document.createElement('button')
         const editMenu = document.createElement('div')
+        const editBtn = document.createElement('button')
 
         newTask.classList.add('task')
         circle.classList.add('select-circle')
@@ -545,12 +545,13 @@
         text.classList.add('title-task')
         text.value = task.value;
         text.readOnly = true;
+        text.setAttribute('data-input-id', id)
         circle.id = id;
         editBtn.classList.add('edit-btn')
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
         editMenu.setAttribute('data-id',id)
         editMenu.classList.add('edit-menu')
-        editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li>Edit</li><li onclick="deleteCurrentTask(${id})">Delete</li></ul>`
+        editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li onclick="editElement(${id})">Edit</li><li onclick="deleteCurrentTask(${id})">Delete</li></ul>`
 
 
         circle.addEventListener('click', (event)=>{
@@ -606,6 +607,13 @@
         const task = taskList.find(task => task.id == id)
         console.log(task)
         currentTaskElement.textContent = task.value    
+    }
+
+    const editElement = (id)=>{
+        const task = taskList.find(task => task.id == id)
+        const text = document.querySelector(`[data-input-id="${id}"]`)
+        text.readOnly = false;
+        text.focus();
     }
 
     const deleteCurrentTask = (id)=>{
@@ -681,7 +689,6 @@
         })
         return id + 1
     }
-
 
     const updateTotalTasks = ()=>{
         totalTasks.textContent = taskList.length
@@ -957,7 +964,6 @@
 
         const soundContainer = document.querySelector('.sound-container')
 
-
         const playSound = (url) => {
             const audio = new Audio(url)
             audio.play()
@@ -980,7 +986,6 @@
             `
             const audio = new Audio(sound.url)
 
-
             soundBtn.addEventListener('click', (event) => {
                 console.log(event.target.id)
                 if(event.target.id!=='fader'){
@@ -992,12 +997,9 @@
                     }else{
                         audio.pause()
                     }
-                }else{
-                    console.log(document.querySelector('#fader').value)
-                    //audio.volume = document.querySelector('#fader').value / 100
                 }
+
                 document.querySelectorAll('.range-fader').forEach(fader => {
-    
                     fader.addEventListener('input', () => {
                         if(sound.id == fader.getAttribute('sound-id')){
                             audio.volume= fader.value/100
