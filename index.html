@@ -460,37 +460,6 @@
 
     initialize();
 
-
-    
-    /*
-    fetch('http://example.com/movies.json')
-    .then(response => response.json())
-    .then(data => console.log(data));
-
-   
-        Set time
-    */
-
-    
-    /*
-    play.onclick = ()=>{
-        active = !active
-        const interval = setInterval(()=>{
-            if(!active){
-                clearInterval(interval)
-            } 
-            if(seconds <= 0){
-                if(breakTime <= 0){
-                    clearInterval(interval)
-                }   
-                timer.innerHTML = timeFormat(breakTime--)
-            }else{
-                timer.innerHTML = timeFormat(seconds--)
-            }
-        },1000)        
-    }
-
-    */
     
 
     /*
@@ -530,7 +499,6 @@
 
     const createTask = (task)=>{
         const id = task.id;
-        
         const newTask = document.createElement('li')
         const text = document.createElement('input')
         const circle = document.createElement('span')
@@ -539,6 +507,7 @@
         const editBtn = document.createElement('button')
 
         newTask.classList.add('task')
+        newTask.setAttribute('data-id',id)
         circle.classList.add('select-circle')
         checkImg.src = './assets/img/icons/check-mini.png'
         circle.appendChild(checkImg)
@@ -549,7 +518,7 @@
         circle.id = id;
         editBtn.classList.add('edit-btn')
         editBtn.innerHTML = `<img src="/assets/img/icons/threedots.svg" />`
-        editMenu.setAttribute('data-id',id)
+        //editMenu.setAttribute('data-id',id)
         editMenu.classList.add('edit-menu')
         editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li onclick="editElement(${id})">Edit</li><li onclick="deleteCurrentTask(${id})">Delete</li></ul>`
 
@@ -664,6 +633,10 @@
             event.target.value = ''
             
             updateTotalTasks()
+
+            updateLocalStorageTasks()
+            setLocalStorageTasks()
+
             console.log(taskList)
         }
     })
@@ -677,6 +650,7 @@
             const task = createTask(taskValue);
             listContainer.appendChild(task)
         })
+
     }
 
     //Auto increment id
@@ -706,6 +680,22 @@
 
     taskList = [{id:1, status:false, value:'Advent of Code - Study everyday'},{status:false, id:2, value:'Task 2'}]
     
+    //updateLocalStorageTasks()
+    setLocalStorageTasks()
+
+    function setLocalStorageTasks (){
+        //taskList = JSON.parse(localStorage.getItem('taskList'))
+
+        if(localStorage.getItem('taskList')){
+            taskList = JSON.parse(localStorage.getItem('taskList'))
+        }
+    }
+
+    function updateLocalStorageTasks (){
+        localStorage.setItem('taskList', JSON.stringify(taskList))
+    }
+
+
     renderList()
     updateTotalTasks()
     updateCompleteTasks()
@@ -740,7 +730,24 @@
     new Sortable(el, {
         animation: 150,
         ghostClass: 'highlight',
-        //swapClass: 'highlight'
+        //swapClass: 'highlight',
+        onEnd: () =>{
+            console.log('end')
+        },
+        group: 'task-list',
+        store:{
+            get:(sortable)=>{
+                let order = localStorage.getItem('task-list-order')
+                if(order){
+                    return order.split('|')
+                }else{
+                    return []
+                }
+            },
+            set:(order)=>{
+                localStorage.setItem('task-list-order', order.toArray().join('|'))
+            }
+        }
     }); 
 
 

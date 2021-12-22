@@ -10,6 +10,6 @@
 
 ## Todo
 - [x] Complete ambient audio feature
-- [ ] Finish CRUD Task
+- [x] Finish CRUD Task
 - [ ] Add local storage option
 - [ ] Refactore code
