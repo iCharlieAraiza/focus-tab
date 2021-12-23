@@ -522,7 +522,6 @@
         editMenu.classList.add('edit-menu')
         editMenu.innerHTML = `<ul><li onclick="setCurrentTask(${id})">Asign ⏱ </li><li onclick="editElement(${id})">Edit</li><li onclick="deleteCurrentTask(${id})">Delete</li></ul>`
 
-
         circle.addEventListener('click', (event)=>{
             const task = taskList.find(task => task.id === id)
             task.status = !task.status
@@ -554,6 +553,7 @@
             if(event.keyCode === 13){
                 text.readOnly = true;
                 updateTask({id,value:text.value})
+                updateLocalStorageTasks()
             }
         })
 
@@ -581,6 +581,7 @@
     const editElement = (id)=>{
         const task = taskList.find(task => task.id == id)
         const text = document.querySelector(`[data-input-id="${id}"]`)
+        updateLocalStorageTasks()
         text.readOnly = false;
         text.focus();
     }
@@ -591,6 +592,7 @@
         console.log(taskList)
         //listContainer.removeChild(task.element)
         renderList()
+        updateLocalStorageTasks()
     }
 
     const updateTask = (taskUpdated)=>{
@@ -683,6 +685,11 @@
     //updateLocalStorageTasks()
     setLocalStorageTasks()
 
+    function reloadLocalStorageTasks(){
+        setLocalStorageTasks()
+        updateLocalStorageTasks()
+    }
+
     function setLocalStorageTasks (){
         //taskList = JSON.parse(localStorage.getItem('taskList'))
 
@@ -691,7 +698,7 @@
         }
     }
 
-    function updateLocalStorageTasks (){
+    function updateLocalStorageTasks(){
         localStorage.setItem('taskList', JSON.stringify(taskList))
     }
 
