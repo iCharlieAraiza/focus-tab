@@ -153,8 +153,20 @@
             <div class="task-container col-5">
                 <div class="tab-section">
                     <div class="tab active">
-                        <div class="title">
-                            Today
+                        <div class="header-tab">
+                            <div class="title">
+                                Today
+                            </div>
+                            <div class="empty-task">
+                                <button>
+                                    <img src="/assets/img/icons/refresh.png" alt="" srcset="">           
+                                </button>
+                            </div>
+                            <div class="show-tab">
+                                <button>
+                                    <img src="/assets/img/icons/right-arrow.png" alt="" srcset="">
+                                </button>
+                            </div>
                         </div>
                         <div class="todo-container">
                             <ul id="listContainer">
@@ -272,6 +284,17 @@
         sessions = 0,
         accumulatedTime = 0;
     
+    /*
+    *   Tab section
+    */
+
+    const tab = document.querySelector('.tab');
+    const showBtn = document.querySelector('.show-tab');
+
+    showBtn.addEventListener('click', () => {
+        tab.classList.toggle('active');
+    });
+
     /*
         Modal
     */
@@ -756,7 +779,6 @@
             }
         }
     }); 
-
 
     /*
         Radio player

@@ -483,10 +483,23 @@ main {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.task-container .tab .header-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0 2rem;
+}
+
 .task-container .tab .title {
   text-transform: uppercase;
   cursor: pointer;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   border-radius: 8px;
 }
 
@@ -509,6 +522,55 @@ main {
 
 .task-container .tab.active .todo-container {
   margin-bottom: auto;
+}
+
+.task-container .tab.active .show-tab img {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+}
+
+.task-container .tab.active .empty-task {
+  display: block;
+  position: relative;
+}
+
+.task-container .tab.active .empty-task:hover {
+  opacity: 1;
+}
+
+.task-container .tab.active .empty-task:hover::after {
+  top: 0px;
+  position: absolute;
+  margin-left: 4px;
+  padding: 4px 5px;
+  font-size: 14px;
+  text-transform: capitalize;
+  content: 'Empty list';
+  background-color: #303843;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.task-container .tab button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.task-container .tab img {
+  width: 20px;
+}
+
+.task-container .tab .show-tab img {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.task-container .tab .empty-task {
+  display: none;
+  margin-right: auto;
+  margin-left: 10px;
 }
 
 .task-container .todo-container {

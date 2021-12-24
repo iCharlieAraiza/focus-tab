@@ -356,13 +356,21 @@ main{
     .tab{
         border-radius: 8px;
         background-color: rgba(0, 0, 0, 0.5);
+
+        .header-tab{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
         .title{
             text-transform: uppercase;
             cursor: pointer;
-            padding: 1rem 2rem;
+            padding: 1rem 0;
             border-radius: 8px;
         }
-
+    
         &.active{
             width: 30rem;
             height: 25rem;
@@ -374,7 +382,53 @@ main{
             .todo-container{
                 margin-bottom: auto;
             }
+
+            .show-tab{
+                img{
+                    transform: rotate(0deg);
+                }
+            }
+
+            .empty-task{
+                display: block;
+                position: relative;
+                &:hover{
+                    opacity: 1;
+                    &::after{
+                        top: 0px;
+                        position: absolute;
+                        margin-left: 4px;
+                        padding: 4px 5px;
+                        font-size: 14px;
+                        text-transform: capitalize;
+                        content: 'Empty list';
+                        background-color: #303843;
+                        width: max-content;
+                    }
+                }
+            }
         }
+
+        button{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        img{
+            width: 20px;
+        }
+        .show-tab{
+            img{
+                transform: rotate(180deg);
+            }
+        }
+
+        .empty-task{
+            display: none;
+            margin-right: auto;
+            margin-left: 10px;
+        }
+
     }
 
     .todo-container{
