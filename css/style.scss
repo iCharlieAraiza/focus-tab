@@ -661,7 +661,7 @@ main{
     }
 }
 
-.modal{
+.modal, #confirm-modal{
     display: none;
     //transition: all 0.2s ease-out;
     background-color: #0000009d;
@@ -678,21 +678,24 @@ main{
     }
 }
 
-.form-container{
-    background-color: #131a21;
+.modal-window{
     color: #fff;
-    max-width: 600px;
-    border-radius: 8px;
+    background-color: #131a21;
     padding: 1.5rem;
     z-index: 10;
     position: absolute;
-    //left: 33%;
-    top: 20%;
+    border-radius: 8px;
     left: 0; 
     right: 0; 
     margin-left: auto; 
     margin-right: auto; 
+}
 
+
+.form-container{
+    max-width: 600px;
+    //left: 33%;
+    top: 20%;
     
     #closeModal{
         float: right;
@@ -775,6 +778,53 @@ main{
         width: 20px;
     }
 }
+
+.confirm-section{
+    width: 100%;
+    max-width: 350px;
+    top: 25%;
+
+    .header-sec{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .button-section{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .close{
+        height: fit-content;
+        cursor: pointer;
+    }
+
+    h1{
+        font-size: 16px;
+        text-align: center;
+        margin: 0;
+        padding-top: 10px;
+    } 
+    p{
+        font-size: 14px;
+    }
+    button{
+        padding: 5px 1rem;
+        color: #fff;
+        background-color: #3a4958;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+    .confirm{
+        background-color: rgba(191, 191, 191, 0.502);
+        display: flex;
+    }
+}
+
 
 .highlight{
     background-color: #fafafa34!important;

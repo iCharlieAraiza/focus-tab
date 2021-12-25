@@ -80,7 +80,7 @@
             <div class="container">
                 <div class="card">
                     <h3 class="figure" id="totalTasks">
-                        19
+                        0
                     </h3>
                     <h3 class="name">
                         today
@@ -187,7 +187,7 @@
         </section>
 
         <section id="pomodoro-settings" class="modal">
-            <div class="form-container">
+            <div class="form-container modal-window">
                 <div class="head-section">
                     <div id="closeModal">
                         &#x2715;
@@ -272,6 +272,23 @@
                 </div>
             </div>
         </section>
+
+        <section id="confirm-modal" class="">
+            <div class="modal-window confirm-section">
+                <div class="header-sec">
+                    <h1>Are you sure you want to archive all taks?</h1>
+                    <div class="close">
+                        &#x2715;
+                    </div>
+                </div>
+                <p>These items will be hidden from your "Today" list</p>
+                <div class="button-section">
+                    <button class="cancel">Cancel</button>
+                    <button class="confirm">Confirm</button>
+                </div>
+            </div>
+        </section>
+
     </main>
     <audio id="pressSound" src="/assets/audio/button-press.wav"></audio>
     <audio id="bellSound" src="/assets/audio/bell.wav"></audio>
@@ -290,9 +307,22 @@
 
     const tab = document.querySelector('.tab');
     const showBtn = document.querySelector('.show-tab');
-
+    const emptyTaskBtn = document.querySelector('.empty-task');
+    const confirmModal = document.querySelector('#confirm-modal');
+    const confirmBtn = document.querySelector('#confirm-modal .confirm');
+    
     showBtn.addEventListener('click', () => {
         tab.classList.toggle('active');
+    });
+
+    emptyTaskBtn.addEventListener('click', () => {
+        confirmModal.classList.toggle('active');
+    });
+
+    confirmBtn.addEventListener('click', () => {
+        cleanTaskList()
+        renderList()
+        confirmModal.classList.remove('active');
     });
 
     /*
@@ -530,6 +560,9 @@
         const editBtn = document.createElement('button')
 
         newTask.classList.add('task')
+        if(task.status){
+            newTask.classList.add('selected')
+        }
         newTask.setAttribute('data-id',id)
         circle.classList.add('select-circle')
         checkImg.src = './assets/img/icons/check-mini.png'
@@ -552,6 +585,8 @@
             changeStatus(id)
             console.log(taskList)
             updateCompleteTasks();
+            updateLocalStorageTasks();
+
         })
         
         document.addEventListener('click', (event)=>{
@@ -645,12 +680,14 @@
             const newTask = {
                 id: incrementId(),
                 value: event.target.value,
-                status: false
+                status: false,
+                active: true
             }
             taskList.push({
                 id: incrementId(),
                 value: taskform.value,
-                status: false
+                status: false,
+                active: true
             })
             const task = createTask(newTask);
             listContainer.prepend(task)
@@ -672,10 +709,13 @@
         taskList.innerHTML = ''
         listContainer.innerHTML = ''
         taskList.forEach(taskValue=>{
-            const task = createTask(taskValue);
-            listContainer.appendChild(task)
+            if(taskValue.active){
+                const task = createTask(taskValue)
+                listContainer.appendChild(task)
+            }
         })
-
+        updateCompleteTasks()
+        updateTotalTasks()
     }
 
     //Auto increment id
@@ -689,14 +729,20 @@
         return id + 1
     }
 
-    const updateTotalTasks = ()=>{
-        totalTasks.textContent = taskList.length
+    function updateTotalTasks(){
+        let totalTasksCount = 0;
+        taskList.forEach(task=>{
+            if(task.active){
+                totalTasksCount++
+            }
+        })
+        totalTasks.textContent = totalTasksCount
     }
 
-    const updateCompleteTasks = ()=>{
+    function updateCompleteTasks(){
         let pending = 0
         taskList.forEach(task=>{
-            if(task.status){
+            if(task.status && task.active){
                 pending++
             }
         })
@@ -723,6 +769,14 @@
 
     function updateLocalStorageTasks(){
         localStorage.setItem('taskList', JSON.stringify(taskList))
+    }
+
+    function cleanTaskList(){
+        taskList.forEach(task=>{
+            task.active = false
+        })
+        updateCompleteTasks()
+        updateLocalStorageTasks()
     }
 
 
@@ -804,6 +858,9 @@
             name: 'tokyo 1',
             url:'https://dl.dropboxusercontent.com/s/6bwwd55lrnp2aab/chill_2.mp3'
         }
+
+        
+
 
         const consoleStyle = 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)';
 
@@ -948,7 +1005,6 @@
 
         const theme = document.querySelector('#theme')
         const themeListContainer = document.querySelector('#themeListContainer')
-
 
         /*
             Ambient sounds

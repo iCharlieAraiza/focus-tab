@@ -11,5 +11,7 @@
 ## Todo
 - [x] Complete ambient audio feature
 - [x] Finish CRUD Task
-- [ ] Add local storage option
+- [x] Add local storage option
+- [ ] Add modal and empty task list
+- [ ] Add option of save theme setings
 - [ ] Refactore code

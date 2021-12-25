@@ -898,7 +898,7 @@ main {
   width: 1.5rem;
 }
 
-.modal {
+.modal, #confirm-modal {
   display: none;
   background-color: #0000009d;
   width: 100%;
@@ -909,24 +909,27 @@ main {
   overflow: hidden;
 }
 
-.modal.active {
+.modal.active, #confirm-modal.active {
   display: block;
   visibility: visible;
 }
 
-.form-container {
-  background-color: #131a21;
+.modal-window {
   color: #fff;
-  max-width: 600px;
-  border-radius: 8px;
+  background-color: #131a21;
   padding: 1.5rem;
   z-index: 10;
   position: absolute;
-  top: 20%;
+  border-radius: 8px;
   left: 0;
   right: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.form-container {
+  max-width: 600px;
+  top: 20%;
 }
 
 .form-container #closeModal {
@@ -1026,6 +1029,68 @@ main {
 
 #pomodoro-config img {
   width: 20px;
+}
+
+.confirm-section {
+  width: 100%;
+  max-width: 350px;
+  top: 25%;
+}
+
+.confirm-section .header-sec {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.confirm-section .button-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.confirm-section .close {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.confirm-section h1 {
+  font-size: 16px;
+  text-align: center;
+  margin: 0;
+  padding-top: 10px;
+}
+
+.confirm-section p {
+  font-size: 14px;
+}
+
+.confirm-section button {
+  padding: 5px 1rem;
+  color: #fff;
+  background-color: #3a4958;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.confirm-section button:hover {
+  opacity: 0.9;
+}
+
+.confirm-section .confirm {
+  background-color: rgba(191, 191, 191, 0.502);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .highlight {
