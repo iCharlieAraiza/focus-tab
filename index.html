@@ -61,11 +61,8 @@
                                 <div class="tag-selector-section">
                                     <ul>
                                         <li>All</li>
-                                        <li>Focus</li>
-                                        <li>Relax</li>
-                                        <li>Studying</li>
-                                        <li>City</li>
-                                        <li>Working</li>
+                                        <li id="focus-mood" id-mood-tag="1">Focus</li>
+                                        <li id-mood-tag="1">Relax</li>
                                     </ul>
                                 </div>
                                 <div class="sound-container">
@@ -151,15 +148,17 @@
             </div>
             <div class="task-container col-5">
                 <div class="tab-section">
-                    <div class="tab active">
+                    <div class="tab">
                         <div class="header-tab">
                             <div class="title">
                                 Today
                             </div>
-                            <div class="empty-task">
-                                <button>
-                                    <img src="/assets/img/icons/refresh.png" alt="" srcset="">           
-                                </button>
+                            <div class="empty-task-container">
+                                <div class="empty-task">
+                                    <button>
+                                        <img src="/assets/img/icons/refresh.png" alt="" srcset="">           
+                                    </button>
+                                </div>
                             </div>
                             <div class="show-tab">
                                 <button>
@@ -172,10 +171,6 @@
                             </ul>
                         </div>
                         <div class="todo-form">
-                            <div class="action-title">
-                                <span>Create a new task</span>
-                            </div>
-
                             <div class="add-form"> 
                                 <input type="text" placeholder="+  New task" id="taskform">
                             </div> 
@@ -306,11 +301,16 @@
 
     const tab = document.querySelector('.tab');
     const showBtn = document.querySelector('.show-tab');
+    const tabTitle = document.querySelector('.header-tab .title');
     const emptyTaskBtn = document.querySelector('.empty-task');
     const confirmModal = document.querySelector('#confirm-modal');
     const confirmBtn = document.querySelector('#confirm-modal .confirm');
     
     showBtn.addEventListener('click', () => {
+        tab.classList.toggle('active');
+    });
+
+    tabTitle.addEventListener('click', () => {
         tab.classList.toggle('active');
     });
 
@@ -1097,6 +1097,8 @@
             console.log("check")
         }
         
+        const audioList = new Set()
+
         ambientSounds.forEach(sound => {
             const soundBtn = document.createElement('div')
             const defaultVolume = 0.5;
@@ -1112,6 +1114,10 @@
                 </div>
             `
             const audio = new Audio(sound.url)
+            
+            if(!audioList.has(audio)){
+                audioList.add({'audio': audio, 'btn': soundBtn})
+            }
 
             soundBtn.addEventListener('click', (event) => {
                 console.log(event.target.id)
@@ -1140,6 +1146,13 @@
 
         })
 
+        const focusMoodBtn = document.querySelector('#focus-mood')
+        focusMoodBtn.addEventListener('click', ()=>{
+            audioList.forEach(audioBtn => {
+                audioBtn.btn.classList.remove('active')
+                audioBtn.audio.pause()
+            })
+        })
 
 </script>
 

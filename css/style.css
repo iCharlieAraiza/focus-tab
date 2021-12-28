@@ -521,12 +521,21 @@ main {
 }
 
 .task-container .tab.active .todo-container {
+  display: block;
   margin-bottom: auto;
+}
+
+.task-container .tab.active .todo-form {
+  display: block;
 }
 
 .task-container .tab.active .show-tab img {
   -webkit-transform: rotate(0deg);
           transform: rotate(0deg);
+}
+
+.task-container .tab.active .empty-task-container {
+  display: block;
 }
 
 .task-container .tab.active .empty-task {
@@ -552,6 +561,11 @@ main {
   width: max-content;
 }
 
+.task-container .tab .empty-task-container {
+  display: none;
+  margin-right: auto;
+}
+
 .task-container .tab button {
   background-color: transparent;
   border: none;
@@ -574,6 +588,7 @@ main {
 }
 
 .task-container .todo-container {
+  display: none;
   height: 15.5rem;
   overflow-y: scroll;
   padding: 0 2rem 3rem 2rem;
@@ -736,13 +751,8 @@ main {
 }
 
 .todo-form {
+  display: none;
   padding: 1.5rem 1rem;
-}
-
-.todo-form .action-title {
-  text-align: center;
-  font-size: 1.2rem;
-  cursor: pointer;
 }
 
 .todo-form .add-form input {

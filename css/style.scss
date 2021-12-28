@@ -380,13 +380,22 @@ main{
             backdrop-filter: blur(2px);
 
             .todo-container{
+                display: block;
                 margin-bottom: auto;
+            }
+
+            //Temporal css style
+            .todo-form{
+                display: block;
             }
 
             .show-tab{
                 img{
                     transform: rotate(0deg);
                 }
+            }
+            .empty-task-container{
+                display: block;
             }
 
             .empty-task{
@@ -409,6 +418,11 @@ main{
             }
         }
 
+        .empty-task-container{
+            display: none;
+            margin-right: auto;
+        }
+    
         button{
             background-color: transparent;
             border: none;
@@ -432,6 +446,7 @@ main{
     }
 
     .todo-container{
+        display: none;
         height: 15.5rem;
         overflow-y: scroll;
         padding: 0 2rem 3rem 2rem;
@@ -572,12 +587,8 @@ main{
 }
 
 .todo-form{
+    display: none;
     padding: 1.5rem 1rem;
-    .action-title{
-        text-align: center;
-        font-size: 1.2rem;
-        cursor: pointer;
-    }
 
     .add-form{
         input{
