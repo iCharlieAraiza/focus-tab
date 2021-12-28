@@ -14,7 +14,6 @@
             <div class="gradient-background" style="opacity:0"></div>
         </div>
     </div>
-
     <main>
         <section class="card-wrapper">
             <div class="menu-wrap">
@@ -323,6 +322,7 @@
         cleanTaskList()
         renderList()
         confirmModal.classList.remove('active');
+        changeStateEmptyBtn();
     });
 
     /*
@@ -336,7 +336,8 @@
     const configBtn = document.getElementById('pomodoro-config')
     const pomodoroInput = document.getElementById('pomodoroInput')
     const breakTimeInput = document.getElementById('breakTimeInput')
-    
+    const cancelConfirmBtn = document.querySelector('#confirm-modal .cancel')
+    const closeConfirmlBtn = document.querySelector('#confirm-modal .close')
 
     const pressSound = document.getElementById('pressSound')
     const bellSound = document.getElementById('bellSound')
@@ -381,6 +382,27 @@
         if(!event.target.closest('#menuBtn') && !event.target.closest('.menu')){
             menu.classList.remove('active')
         } 
+    })
+
+    cancelConfirmBtn.addEventListener('click', ()=>{
+        confirmModal.classList.remove('active')
+    })
+
+    closeConfirmlBtn.addEventListener('click', ()=>{
+        confirmModal.classList.remove('active')
+    })
+
+    modal.addEventListener('click', (event)=>{
+        console.log(event.target)
+        if(event.target == modal){
+            modal.classList.remove('active')
+        }
+    })
+
+    confirmModal.addEventListener('click', (event)=>{
+        if(event.target == confirmModal){
+            confirmModal.classList.remove('active')
+        }
     })
 
 
@@ -514,12 +536,9 @@
     initialize();
 
     
-
     /*
         Create a Clock
     */
-
-
 
     setInterval(()=>{
         const today = new Date(); 
@@ -698,6 +717,7 @@
 
             updateLocalStorageTasks()
             setLocalStorageTasks()
+            changeStateEmptyBtn()
 
             console.log(taskList)
         }
@@ -779,10 +799,19 @@
         updateLocalStorageTasks()
     }
 
+    function changeStateEmptyBtn(){
+        if(listContainer.children.length === 0){
+            emptyTaskBtn.style.display = 'none'
+        }else{
+            emptyTaskBtn.style.display = 'block'
+        }
+    }
 
+    
     renderList()
     updateTotalTasks()
     updateCompleteTasks()
+    changeStateEmptyBtn()
 
     /*
         Menu section
@@ -853,14 +882,16 @@
         /*
             Create a theme section to change the theme
         */
-        let currentTheme = {
-            id: 1,
-            name: 'tokyo 1',
-            url:'https://dl.dropboxusercontent.com/s/6bwwd55lrnp2aab/chill_2.mp3'
+        let currentTheme = null
+
+        if(localStorage.getItem('currentTheme')){
+            currentTheme = JSON.parse(localStorage.getItem('currentTheme'))
         }
 
-        
-
+        function setTheme(theme){
+            currentTheme = theme
+            localStorage.setItem('currentTheme', JSON.stringify(theme))
+        }
 
         const consoleStyle = 'font-weight: bold; font-size: 50px;color: red; text-shadow: 3px 3px 0 rgb(217,31,38) , 6px 6px 0 rgb(226,91,14) , 9px 9px 0 rgb(245,221,8) , 12px 12px 0 rgb(5,148,68) , 15px 15px 0 rgb(2,135,206) , 18px 18px 0 rgb(4,77,145) , 21px 21px 0 rgb(42,21,113)';
 
@@ -959,13 +990,13 @@
 
         const themeList = document.querySelectorAll('[theme-id-target]')
 
-        const getTheme = (id) => {
+        function getTheme(id){
             console.log(id)
             const theme = themesData.find(theme => theme.id == id)
             return theme
         }
 
-        const updateTheme = () => {
+        function updateTheme(){
             const backgroundTag = document.querySelector('.background-img')
             backgroundTag.innerHTML = `
                 <div class="fadein">
@@ -993,18 +1024,22 @@
             theme.addEventListener('click', () => {
                 const id = theme.getAttribute('theme-id-target')
                 currentTheme = getTheme(id)
+                setTheme(currentTheme)
                 updateTheme()
-                /*themeList.forEach(theme => {
-                    theme.classList.remove('active')
-                })
-                theme.classList.add('active')
-                target.classList.add('active')
-                */
             })
         })
 
         const theme = document.querySelector('#theme')
         const themeListContainer = document.querySelector('#themeListContainer')
+
+        // Implementing theme list local storage
+        console.log(currentTheme)
+        if(currentTheme === null){
+            currentTheme = getTheme(1)
+        }
+
+        updateTheme()
+
 
         /*
             Ambient sounds
