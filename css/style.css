@@ -1108,6 +1108,7 @@ main {
 }
 
 #habits-calendar {
+  display: none;
   z-index: 10;
   top: 27%;
   position: absolute;
@@ -1115,7 +1116,7 @@ main {
   left: 0;
   right: 0;
   margin: 0 auto;
-  max-width: 1244px;
+  max-width: 944px;
   -webkit-backdrop-filter: blur(7px);
           backdrop-filter: blur(7px);
   color: white;
@@ -1147,9 +1148,36 @@ main {
 
 #habits-calendar .day {
   text-align: center;
-  font-size: 20px;
+  font-size: 22px;
   background-color: #2d4361;
   padding: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+#habits-calendar .day.active {
+  color: #cccccc;
+}
+
+#habits-calendar .day.active::after, #habits-calendar .day.active::before {
+  position: absolute;
+  width: 36px;
+  height: 4px;
+  background-color: white;
+  border-radius: 2px;
+  top: 0px;
+}
+
+#habits-calendar .day.active:before {
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  left: 2px;
+}
+
+#habits-calendar .day.active::after {
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  right: 2px;
 }
 
 @keyframes fadeIn {

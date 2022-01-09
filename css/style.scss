@@ -843,6 +843,7 @@ main{
 
 
 #habits-calendar{
+    display: none;
     z-index: 10;
     top: 27%;
     position: absolute;
@@ -850,7 +851,7 @@ main{
     left: 0;
     right: 0;
     margin: 0 auto;
-    max-width: 1244px;
+    max-width: 944px;
     backdrop-filter: blur(7px);
     color: white;
     padding: 2rem;
@@ -875,10 +876,37 @@ main{
 
     .day{
         text-align: center;
-        font-size: 20px;
+        font-size: 22px;
         background-color: #2d4361;
         padding: 10px;
+        position: relative;
+        cursor: pointer;
+        
+        &.active{
+            color: #cccccc;
+            &::after, &::before{
+                position:absolute;
+                width:36px;
+                height:4px;
+                background-color:white;
+                border-radius:2px;
+                top:0px;
+            }
+            &:before{
+                -webkit-transform:rotate(45deg);
+                -moz-transform:rotate(45deg);
+                transform:rotate(45deg);
+                left:2px;
+            }
+            &::after{
+                -webkit-transform:rotate(-45deg);
+                -moz-transform:rotate(-45deg);
+                transform:rotate(-45deg);
+                right:2px;
+            }
+        }
     }
+
 }
 
 
